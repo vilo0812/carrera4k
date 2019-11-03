@@ -1,8 +1,9 @@
 <?php
 
+use App\Direcciones;
 use Illuminate\Database\Seeder;
 
-class RegistrarseSeeder extends Seeder
+class DireccionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +12,6 @@ class RegistrarseSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Direcciones::class,10)->create();
     }
 }

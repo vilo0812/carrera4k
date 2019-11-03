@@ -14,7 +14,7 @@ class AddDireccionIdToRegistros extends Migration
     public function up()
     {
         Schema::table('registros', function (Blueprint $table) {
-            $table->unsignedbigInteger('direccion_id');
+            $table->bigInteger('direccion_id')->unsigned()->nullable();
             $table->foreign('direccion_id')->references('id')->on('direcciones')->onDelete('cascade');
         });
     }

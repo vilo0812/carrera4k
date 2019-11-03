@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class grados extends Model
+class Distancia extends Model
 {
-    //
+public $timestamps = false;
 }

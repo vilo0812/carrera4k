@@ -1,8 +1,9 @@
 <?php
 
+use App\Talla;
 use Illuminate\Database\Seeder;
 
-class DireccionesSeeder extends Seeder
+class TallaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +12,6 @@ class DireccionesSeeder extends Seeder
      */
     public function run()
     {
-        //
+       factory(Talla::class,10)->create();
     }
 }

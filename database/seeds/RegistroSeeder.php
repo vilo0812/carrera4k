@@ -1,8 +1,9 @@
 <?php
 
+use App\Registro;
 use Illuminate\Database\Seeder;
 
-class TallasSeeder extends Seeder
+class RegistroSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +12,6 @@ class TallasSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Registro::class,10)->create();
     }
 }

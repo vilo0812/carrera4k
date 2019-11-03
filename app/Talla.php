@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class registros extends Model
+class Talla extends Model
 {
-    //
+   public $timestamps = false;
 }

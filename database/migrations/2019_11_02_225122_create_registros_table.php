@@ -15,7 +15,6 @@ class CreateRegistrosTable extends Migration
     {
         Schema::create('registros', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('distancia',20);
             $table->timestamps();
         });
     }

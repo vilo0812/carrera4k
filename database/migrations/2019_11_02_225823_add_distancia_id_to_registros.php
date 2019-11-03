@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddParticipanteIdToRegistros extends Migration
+class AddDistanciaIdToRegistros extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AddParticipanteIdToRegistros extends Migration
     public function up()
     {
         Schema::table('registros', function (Blueprint $table) {
-            $table->bigInteger('participante_id')->unsigned()->nullable();
-            $table->foreign('participante_id')->references('id')->on('participantes')->onDelete('cascade');
+            $table->bigInteger('distancia_id')->unsigned()->nullable();
+            $table->foreign('distancia_id')->references('id')->on('distancias')->onDelete('cascade');
         });
     }
 
@@ -27,8 +27,8 @@ class AddParticipanteIdToRegistros extends Migration
     public function down()
     {
         Schema::table('registros', function (Blueprint $table) {
-            $table->dropForeign(['participante_id']);
-            $table->dropColumn('participante_id');
+            $table->dropForeign(['distancia_id']);
+            $table->dropColumn('distancia_id');
         });
     }
 }

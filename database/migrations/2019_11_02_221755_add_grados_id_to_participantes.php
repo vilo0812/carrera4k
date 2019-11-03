@@ -14,7 +14,7 @@ class AddGradosIdToParticipantes extends Migration
     public function up()
     {
         Schema::table('participantes', function (Blueprint $table) {
-            $table->unsignedbigInteger('grado_id');
+            $table->bigInteger('grado_id')->unsigned()->nullable();
             $table->foreign('grado_id')->references('id')->on('grados')->onDelete('cascade');
         });
     }
