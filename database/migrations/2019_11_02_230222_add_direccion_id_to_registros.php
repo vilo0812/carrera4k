@@ -14,8 +14,8 @@ class AddDireccionIdToRegistros extends Migration
     public function up()
     {
         Schema::table('registros', function (Blueprint $table) {
-            $table->bigInteger('direccion_id')->unsigned()->nullable();
-            $table->foreign('direccion_id')->references('id')->on('direcciones')->onDelete('cascade');
+            $table->bigInteger('direcciones_id')->unsigned()->nullable();
+            $table->foreign('direcciones_id')->references('id')->on('direcciones')->onDelete('cascade');
         });
     }
 
@@ -27,8 +27,8 @@ class AddDireccionIdToRegistros extends Migration
     public function down()
     {
         Schema::table('registros', function (Blueprint $table) {
-            $table->dropForeign(['direccion_id']);
-            $table->dropColumn('direccion_id');
+            $table->dropForeign(['direcciones_id']);
+            $table->dropColumn('direcciones_id');
         });
     }
 }

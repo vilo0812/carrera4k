@@ -1,2 +1,2 @@
 <?php
-Route::get('/{any}', 'RegisterController@index')->where('any', '.*');
+Route::get('/{any}', 'Carrera4kController@index')->where('any', '.*');

@@ -37,7 +37,7 @@ class Registro extends Model
     		"tallaPantalon" => $talla->pantalon,
     		"tallaCamisa" => $talla->camisa,
     	];
-    	return$registrosCompleto;
+    	return $registrosCompleto;
     }
     public function distancia(){
       return $this->belongsTo(Distancia::class);
