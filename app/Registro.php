@@ -16,7 +16,7 @@ class Registro extends Model
     	$registro = static::leftJoin("participantes","registros.participante_id","=","participantes.id")->join("grados","participantes.grado_id","=","grados.id")->join("direcciones","registros.direccion_id","=","direcciones.id")->join("distancias","registros.distancia_id","=","distancias.id")->join("tallas","registros.talla_id","=","tallas.id")->select('participantes.nombre','participantes.apellido','participantes.cedula','participantes.edad','participantes.sexo','grados.grado','direcciones.direccion','direcciones.plantel','distancias.distancia','tallas.zapato','tallas.pantalon','tallas.camisa')->get();
     	return $registro;
     }*/
-    public function RegistrosCompletos($id){
+    public function registroCompletoById($id){
     	$registro = Registro::find($id);
     	$participante = $registro->participante;
     	$grado = $participante->grado;

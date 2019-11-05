@@ -56,9 +56,13 @@ class Carrera4kController extends Controller
     	return $registro;
 	}
 	public function mostrar(){
-		$id = Registro::get();
-		$registro = new Registro();
-		// return $registro->RegistrosCompletos($id->id);
-		return $id;
-	}
+        $registro = new Registro();
+        $todos = Registro::all();
+        $resultado=[];
+        foreach ($todos as $registros => $registro) {
+        $array =$registro->registroCompletoById($registro->id);
+        array_push($resultado,$array);
+        }
+        return $resultado;
+    }
 }
