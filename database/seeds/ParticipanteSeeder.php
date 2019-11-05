@@ -17,7 +17,8 @@ class ParticipanteSeeder extends Seeder
         'apellido' => 'viloria',
         'cedula' => '27167028',
         'edad' => 21,
-        'sexo' => 'masculino'
+        'sexo' => 'masculino',
+        'grado_id' => 1
         ]);
         factory(Participante::class, 10)->create();
     }

@@ -53,7 +53,8 @@ class Carrera4kController extends Controller
     	$registro->participante_id = $participante_id;
     	$registro->direcciones_id = $direccion_id;
     	$registro->talla_id = $tallas_id;
-    	return $registro;
+        $registro->save();
+    	return "registrado exitosamente";
 	}
 	public function mostrar(){
         $registro = new Registro();
