@@ -15,9 +15,9 @@ class CreateTallasTable extends Migration
     {
         Schema::create('tallas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('zapato',20);
-            $table->string('pantalon',20);
-            $table->string('camisa',20);
+            $table->string('zapato',20)->nullable();
+            $table->string('pantalon',20)->nullable();
+            $table->string('camisa',20)->nullable();
         });
     }
 

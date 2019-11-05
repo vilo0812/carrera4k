@@ -13,21 +13,21 @@ class Carrera4kController extends Controller
     public function index() {
 	  return view('app');
 	  }
-	public function registrar(Faker $faker){
-		$registrosCompleto = [
-    		'nombre' => $faker->firstname,
-	        'apellido' => $faker->lastname,
-	        'cedula' => $faker->randomNumber(7),
-	        'edad' => $faker->randomNumber(2),
-	        'sexo' => $faker->randomElement(['masculino','femenino']),
-    		"grado_id" => $faker->randomElement([1,2,3,4,5,6,7,8,9,10]),
-    		'direccion' => $faker->address,
-        	'plantel' => $faker->secondaryAddress,
-        	'distancia_id' => $faker->randomElement([1,2,3]),
-    		 'zapato' => $faker->randomNumber(2),
-        	'pantalon' => $faker->randomNumber(2),
-        	'camisa' => $faker->randomNumber(2)
-    	];
+	public function registrar(Request $registrosCompleto){
+		// $registrosCompleto = [
+  //   		'nombre' => $faker->firstname,
+	 //        'apellido' => $faker->lastname,
+	 //        'cedula' => $faker->randomNumber(7),
+	 //        'edad' => $faker->randomNumber(2),
+	 //        'sexo' => $faker->randomElement(['masculino','femenino']),
+  //   		"grado_id" => $faker->randomElement([1,2,3,4,5,6,7,8,9,10]),
+  //   		'direccion' => $faker->address,
+  //       	'plantel' => $faker->secondaryAddress,
+  //       	'distancia_id' => $faker->randomElement([1,2,3]),
+  //   		 'zapato' => $faker->randomNumber(2),
+  //       	'pantalon' => $faker->randomNumber(2),
+  //       	'camisa' => $faker->randomNumber(2)
+  //   	];
     	$participante = new Participante();
     	$participante->nombre = $registrosCompleto['nombre'];
     	$participante->apellido = $registrosCompleto['apellido'];
@@ -38,7 +38,7 @@ class Carrera4kController extends Controller
     	$participante->save();
     	$participante_id = $participante->id;
     	$direccion = new Direcciones();
-    	$direccion->direcciones = $registrosCompleto['direccion'];
+    	$direccion->direccion = $registrosCompleto['direccion'];
     	$direccion->plantel = $registrosCompleto['plantel'];
     	$direccion->save();
     	$direccion_id = $direccion->id;
