@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Direcciones;
 use App\Participante;
+use App\Planteles;
 use App\Registro;
 use App\Talla;
 use Faker\Generator as Faker;
@@ -39,7 +40,6 @@ class Carrera4kController extends Controller
     	$participante_id = $participante->id;
     	$direccion = new Direcciones();
     	$direccion->direccion = $registrosCompleto['direccion'];
-    	$direccion->plantel = $registrosCompleto['plantel'];
     	$direccion->save();
     	$direccion_id = $direccion->id;
     	$tallas = new Talla();
@@ -49,7 +49,9 @@ class Carrera4kController extends Controller
     	$tallas->save();
     	$tallas_id = $tallas->id;
     	$registro = new Registro();
-    	$registro->distancia_id = $registrosCompleto['distancia_id'];
+        $registro->n_competidor = 1;
+        $registro->plantel_id = Planteles::wherePlantel($registrosCompleto['plantel'])->value('id');
+        $registro->distancia_id = $registrosCompleto['distancia_id'];
     	$registro->participante_id = $participante_id;
     	$registro->direcciones_id = $direccion_id;
     	$registro->talla_id = $tallas_id;
