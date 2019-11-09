@@ -55,7 +55,7 @@ class Carrera4kController extends Controller
     	$registro->talla_id = $tallas_id;
         $registro->save();
     	return "registrado exitosamente";
-	}
+	}//permite registrar a un usuario
 	public function mostrar(){
         $registro = new Registro();
         $todos = Registro::all();
@@ -65,5 +65,5 @@ class Carrera4kController extends Controller
         array_push($resultado,$array);
         }
         return $resultado;
-    }
+    }//permite mostrar la informacion de todos los usuarios participantes
 }

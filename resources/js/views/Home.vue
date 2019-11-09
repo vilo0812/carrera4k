@@ -20,7 +20,7 @@
        </div>
         <div class="input_group">
            <label for="apellido" id="labelApellido" class="label">Apellido: </label>
-            <input type="text" name="apellido" id="apellido" placeholder="Introducir Apellido" class="input_form" v-model="apellido" minlength="5" maxlength="50" required>
+            <input type="text" name="apellido" id="apellido" placeholder="Introducir Apellido" class="input_form" v-model="apellido" minlength="3" maxlength="50" required>
          </div>
        <div class="input_group">
          <label for="cedula" id="labelCedula" class="label">Cédula: </label>

@@ -12,6 +12,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Registro extends Model
 {
+    /*public funtion n_competidor(){
+        $id = Registro::get()->last();
+    if($id == null){
+        $id = 1;
+    }else{
+        $id = $id->n_competidor;
+        $id = $id + 1;
+    }
+    }*/
     /*public function RegistrosCompletos(){
     	$registro = static::leftJoin("participantes","registros.participante_id","=","participantes.id")->join("grados","participantes.grado_id","=","grados.id")->join("direcciones","registros.direccion_id","=","direcciones.id")->join("distancias","registros.distancia_id","=","distancias.id")->join("tallas","registros.talla_id","=","tallas.id")->select('participantes.nombre','participantes.apellido','participantes.cedula','participantes.edad','participantes.sexo','grados.grado','direcciones.direccion','direcciones.plantel','distancias.distancia','tallas.zapato','tallas.pantalon','tallas.camisa')->get();
     	return $registro;
@@ -38,7 +47,7 @@ class Registro extends Model
     		"tallaCamisa" => $talla->camisa,
     	];
     	return $registrosCompleto;
-    }
+    }//registra al usuario segun su $id
     public function distancia(){
       return $this->belongsTo(Distancia::class);
     }
