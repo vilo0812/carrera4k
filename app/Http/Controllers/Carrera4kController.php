@@ -15,20 +15,9 @@ class Carrera4kController extends Controller
 	  return view('app');
 	  }
 	public function registrar(Request $registrosCompleto){
-		// $registrosCompleto = [
-  //   		'nombre' => $faker->firstname,
-	 //        'apellido' => $faker->lastname,
-	 //        'cedula' => $faker->randomNumber(7),
-	 //        'edad' => $faker->randomNumber(2),
-	 //        'sexo' => $faker->randomElement(['masculino','femenino']),
-  //   		"grado_id" => $faker->randomElement([1,2,3,4,5,6,7,8,9,10]),
-  //   		'direccion' => $faker->address,
-  //       	'plantel' => $faker->secondaryAddress,
-  //       	'distancia_id' => $faker->randomElement([1,2,3]),
-  //   		 'zapato' => $faker->randomNumber(2),
-  //       	'pantalon' => $faker->randomNumber(2),
-  //       	'camisa' => $faker->randomNumber(2)
-  //   	];
+        /////////////////////////////
+        //registro que asigna un numero de competicion al participante y lo registra
+        ////////////////////////////
     	$participante = new Participante();
     	$participante->nombre = $registrosCompleto['nombre'];
     	$participante->apellido = $registrosCompleto['apellido'];
@@ -36,33 +25,41 @@ class Carrera4kController extends Controller
     	$participante->edad = $registrosCompleto['edad'];
     	$participante->sexo = $registrosCompleto['sexo'];
     	$participante->grado_id = $registrosCompleto['grado_id'];
-    	$participante->save();
-    	$participante_id = $participante->id;
+    	$participante->save();//guardamos al participante
+    	$participante_id = $participante->id;//sacamos el id del participante
     	$direccion = new Direcciones();
     	$direccion->direccion = $registrosCompleto['direccion'];
-    	$direccion->save();
-    	$direccion_id = $direccion->id;
+    	$direccion->save();//registramos la direccion
+    	$direccion_id = $direccion->id;//sacamos el id de la direccion
     	$tallas = new Talla();
     	$tallas->zapato = $registrosCompleto['zapato'];
     	$tallas->pantalon = $registrosCompleto['pantalon'];
     	$tallas->camisa = $registrosCompleto['camisa'];
-    	$tallas->save();
-    	$tallas_id = $tallas->id;
-    	$registro = new Registro();
-        $registro->n_competidor = 1;
-        $registro->plantel_id = Planteles::wherePlantel($registrosCompleto['plantel'])->value('id');
-        $registro->distancia_id = $registrosCompleto['distancia_id'];
-    	$registro->participante_id = $participante_id;
+    	$tallas->save();//registramos la talla
+    	$talla_id = $tallas->id;//sacamos el id de la talla
+        $plantel = Planteles::wherePlantel($registrosCompleto['plantel'])->value('id');//sacamos el id que le pertenece a el plantel que el usuario selecciono, ya que el id es lo que vamos a registrar
+        $distancia_id = $registrosCompleto['distancia_id'];//sacamos el id de la distancia
+        $n_competidor = $registro = Registro::wherePlantel_id($plantel)->whereDistancia_id($distancia_id)->get()->last();//sacamos el ultimo registro en el cual se hayan inscrito los participantes de la misma entidad publica y en la misma distancia de carrera
+        if($n_competidor->n_competidor == null){//verificamos el numero de competicion y le asigamos el siguiente numero de carrera
+            $n_competidor = 1;
+        }else{
+            $n_competidor = $n_competidor->n_competidor + 1;
+        }
+        $registro = new Registro();
+        $registro->n_competidor = $n_competidor;
+        $registro->plantel_id = $plantel;
+        $registro->distancia_id = $distancia_id;
+        $registro->participante_id = $participante_id;
     	$registro->direcciones_id = $direccion_id;
-    	$registro->talla_id = $tallas_id;
-        $registro->save();
-    	return "registrado exitosamente";
+    	$registro->talla_id = $talla_id;//llenamos el objeto
+        $registro->save();//registramos
+    	return $registro;
 	}
-	public function mostrar(){
+	public function mostrar(){//api ref que me permite mostrar toda la informacion de la base de datos
         $registro = new Registro();
         $todos = Registro::all();
         $resultado=[];
-        foreach ($todos as $registros => $registro) {
+        foreach ($todos as $registros => $registro) {//vamos a llamar al metodo registroCompletoById por cada id de registros, de esta manera almacenaremos un array gigante con todos los valores de los registros de la base de datos
         $array =$registro->registroCompletoById($registro->id);
         array_push($resultado,$array);
         }
