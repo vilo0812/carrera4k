@@ -15,6 +15,7 @@ class CreateRegistrosTable extends Migration
     {
         Schema::create('registros', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('n_competidor');
             $table->timestamps();
         });
     }
