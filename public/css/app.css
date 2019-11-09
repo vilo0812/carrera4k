@@ -2,6 +2,26 @@
 *[data-v-63cd6604], *[data-v-63cd6604]:before, *[data-v-63cd6604]:after {
   box-sizing: border-box;
 }
+.error[data-v-63cd6604]{
+  color:red;
+}
+.border-danger[data-v-63cd6604]{
+  border-color:red;
+}
+.fade-enter-active[data-v-63cd6604], .fade-leave-active[data-v-63cd6604] {
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+.fade-enter[data-v-63cd6604], .fade-leave-to[data-v-63cd6604] /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0;
+}
+.verificar[data-v-63cd6604]{
+   max-width: 500px;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background: #f4f7f8;
+  border-radius: 8px;
+}
 .fondo[data-v-63cd6604] {
     background: url(/images/carrera03.png?60f563522b8db970a312ecf5c9b9caa8);
     background-position: top center;
@@ -69,6 +89,27 @@ header[data-v-63cd6604]{
 }
 img[data-v-63cd6604] {
     max-width: 100%;
+}
+.number[data-v-63cd6604] {
+  background-color: #5fcf80;
+  color: #fff;
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  font-size: 0.8em;
+  margin-right: 4px;
+  line-height: 30px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+  border-radius: 100%;
+}
+.header[data-v-63cd6604] {
+    display: -webkit-box;
+    display: flex;
+    justify-content: space-around;
+    -webkit-box-align: center;
+            align-items: center;
+    margin-bottom:10em;
 }
 .item[data-v-63cd6604] {
     flex-basis: 13%;
