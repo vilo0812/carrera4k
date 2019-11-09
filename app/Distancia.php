@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Distancia extends Model
 {
 public $timestamps = false;
-public function registros(){
+    public function registros(){
         return $this->hasMany(Registro::class);
     }
     public function direcciones(){

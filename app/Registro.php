@@ -6,6 +6,7 @@ use App\Direcciones;
 use App\Distancia;
 use App\Grado;
 use App\Participante;
+use App\Planteles;
 use App\Registro;
 use App\Talla;
 use Illuminate\Database\Eloquent\Model;
@@ -18,12 +19,15 @@ class Registro extends Model
     }*/
     public function registroCompletoById($id){
     	$registro = Registro::find($id);
+        $n_competidor = $registro->n_competidor;
     	$participante = $registro->participante;
     	$grado = $participante->grado;
+        $plantel = $registro->plantel;
     	$direccion = $registro->direcciones;
     	$distancia = $registro->distancia;
     	$talla = $registro->talla;
     	$registrosCompleto = [
+            "n_competidor" => $n_competidor,
     		"nombre" => $participante->nombre,
     		"apellido" => $participante->apellido,
     		"cedula" => $participante->cedula,
@@ -31,13 +35,16 @@ class Registro extends Model
     		"sexo" => $participante->sexo,
     		"grado" => $grado->grado,
     		"direccion" => $direccion->direccion,
-    		"plantel" => $direccion->plantel,
+    		"plantel" => $plantel->plantel,
     		"distancia" => $distancia->distancia,
     		"tallaZapato" => $talla->zapato,
     		"tallaPantalon" => $talla->pantalon,
     		"tallaCamisa" => $talla->camisa,
     	];
     	return $registrosCompleto;
+    }
+    public function plantel(){
+      return $this->belongsTo(Planteles::class);
     }
     public function distancia(){
       return $this->belongsTo(Distancia::class);
