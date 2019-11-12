@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Direcciones;
+use App\Exports\ParticipantesExport;
+use App\Exports\RegistroPersonalizadoExport;
+use App\Exports\Registros4KExport;
+use App\Exports\RegistrosExport;
+use App\Exports\RegistrosMCAExport;
+use App\Exports\RegistrosVMExport;
 use App\Participante;
 use App\Planteles;
 use App\Registro;
 use App\Talla;
 use Faker\Generator as Faker;
 use Illuminate\Http\Request;
+// use Maatwebsite\Excel\Facades\Excel;
 class Carrera4kController extends Controller
 {
     public function index() {
@@ -58,7 +65,7 @@ class Carrera4kController extends Controller
         $registro->save();//registramos
     	return $registro;
 	}
-	public function mostrar(){//api ref que me permite mostrar toda la informacion de la base de datos
+	public function mostrar(){//al final no la utilizamos //api ref que me permite mostrar toda la informacion de la base de datos
         $registro = new Registro();
         $todos = Registro::all();
         $resultado=[];
@@ -67,5 +74,20 @@ class Carrera4kController extends Controller
         array_push($resultado,$array);
         }
         return $resultado;
+    }
+    public function descargarTodo(){
+        //$todo=$this->mostrar();
+        // return Excel::download(new ParticipantesExport, 'participantes.xlsx');
+        return (new RegistrosExport)->download('registros.xlsx');
+        //return Excel::download(new RegistrosExport, 'registros.xlsx');
+    }
+    public function descargarMCA(){
+        return (new RegistrosMCAExport)->download('registrosMCA.xlsx');
+    }
+    public function descargarVM(){
+        return (new RegistrosVMExport)->download('registrosVM.xlsx');
+    }
+    public function descargar4K(){
+        return (new Registros4KExport)->download('registros4K.xlsx');
     }
 }

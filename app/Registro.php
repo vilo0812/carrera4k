@@ -13,10 +13,36 @@ use Illuminate\Database\Eloquent\Model;
 
 class Registro extends Model
 {
-    /*public function RegistrosCompletos(){
-    	$registro = static::leftJoin("participantes","registros.participante_id","=","participantes.id")->join("grados","participantes.grado_id","=","grados.id")->join("direcciones","registros.direccion_id","=","direcciones.id")->join("distancias","registros.distancia_id","=","distancias.id")->join("tallas","registros.talla_id","=","tallas.id")->select('participantes.nombre','participantes.apellido','participantes.cedula','participantes.edad','participantes.sexo','grados.grado','direcciones.direccion','direcciones.plantel','distancias.distancia','tallas.zapato','tallas.pantalon','tallas.camisa')->get();
+    public function RegistrosByDistanciaByPlantel($distancia,$plantel){
+        $registro = static::leftJoin("participantes","registros.participante_id","=","participantes.id")
+        ->join("grados","participantes.grado_id","=","grados.id")
+        ->join("direcciones","registros.direcciones_id","=","direcciones.id")
+        ->join("distancias","registros.distancia_id","=","distancias.id")
+        ->join("tallas","registros.talla_id","=","tallas.id")
+        ->join("planteles","registros.plantel_id","=","planteles.id")
+        ->select('participantes.nombre','participantes.apellido','participantes.cedula','participantes.edad','participantes.sexo','grados.grado','direcciones.direccion','planteles.plantel','distancias.distancia','tallas.zapato','tallas.pantalon','tallas.camisa')->where("registros.distancia_id","=","$distancia")->where("registros.plantel_id","=","$plantel")->get();
+        return $registro;
+    }
+    public function RegistrosByDistancia($id){
+        $registro = static::leftJoin("participantes","registros.participante_id","=","participantes.id")
+        ->join("grados","participantes.grado_id","=","grados.id")
+        ->join("direcciones","registros.direcciones_id","=","direcciones.id")
+        ->join("distancias","registros.distancia_id","=","distancias.id")
+        ->join("tallas","registros.talla_id","=","tallas.id")
+        ->join("planteles","registros.plantel_id","=","planteles.id")
+        ->select('participantes.nombre','participantes.apellido','participantes.cedula','participantes.edad','participantes.sexo','grados.grado','direcciones.direccion','planteles.plantel','distancias.distancia','tallas.zapato','tallas.pantalon','tallas.camisa')->where("registros.distancia_id","=","$id")->get();
+        return $registro;
+    }
+    public function RegistrosCompletos(){
+    	$registro = static::leftJoin("participantes","registros.participante_id","=","participantes.id")
+        ->join("grados","participantes.grado_id","=","grados.id")
+        ->join("direcciones","registros.direcciones_id","=","direcciones.id")
+        ->join("distancias","registros.distancia_id","=","distancias.id")
+        ->join("tallas","registros.talla_id","=","tallas.id")
+        ->join("planteles","registros.plantel_id","=","planteles.id")
+        ->select('participantes.nombre','participantes.apellido','participantes.cedula','participantes.edad','participantes.sexo','grados.grado','direcciones.direccion','planteles.plantel','distancias.distancia','tallas.zapato','tallas.pantalon','tallas.camisa')->get();
     	return $registro;
-    }*/
+    }
     public function registroCompletoById($id){
     	$registro = Registro::find($id);
         $n_competidor = $registro->n_competidor;

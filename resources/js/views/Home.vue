@@ -218,12 +218,59 @@ export default {
 	        pantalon:this.zapato,
 	        camisa:this.camisa
 	      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
 	      // console.log(params);
 	      let url = `http://127.0.0.1:8000/api/registrar`
 	       axios.post(url,params)
 	       .then(res => {
 	         alert('registrado con exito');
 	       })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
       },
   computed: {
