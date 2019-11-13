@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDireccionesTable extends Migration
+class CreatePlantelesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateDireccionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('direcciones', function (Blueprint $table) {
+        Schema::create('planteles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('direccion',150);
+            $table->string('plantel',150);
         });
     }
 
@@ -26,6 +26,6 @@ class CreateDireccionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('direcciones');
+        Schema::dropIfExists('planteles');
     }
 }

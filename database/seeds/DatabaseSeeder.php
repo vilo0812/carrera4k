@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         'tallas',
         'direcciones',
         'distancias',
+        'planteles',
         'registros'
         ]);
         $this->call(GradoSeeder::class);
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TallaSeeder::class);
         $this->call(DireccionSeeder::class);
         $this->call(DistanciaSeeder::class);
+        $this->call(PlantelesSeeder::class);
         $this->call(RegistroSeeder::class);
     }
     public function truncateTable(array $tables){

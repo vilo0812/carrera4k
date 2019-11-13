@@ -19,7 +19,7 @@ class DistanciaSeeder extends Seeder
         	'distancia' => 'Vuelta a la Manzana'
         ]);
         Distancia::create([
-        	'distancia' => '4k'
+        	'distancia' => 'Copa Bruno Carrasquel 4k'
         ]);
     }
 }
