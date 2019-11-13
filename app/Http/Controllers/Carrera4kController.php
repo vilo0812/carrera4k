@@ -95,9 +95,9 @@ class Carrera4kController extends Controller
     /*public function descargaPersonalizada(Request $personal){
         return (new RegistroPersonalExport($personal['distancia'],$personal['plantel']))->download('registroPersonal.xlsx');
     }*/
-    public function descargaP(){
-        $plantel = Planteles::wherePlantel('E B COLEGIO SAN JUAN BAUTISTA')->value('id');
-        $distancia =  Distancia::whereDistancia('Vuelta a la Manzana')->value('id');
+    public function descargaP(Request $datos){
+        $plantel = Planteles::wherePlantel($datos['plantel'])->value('id');
+        $distancia =  Distancia::whereDistancia($datos['distancia'])->value('id');
         return (new RegistroPersonalExport($distancia,$plantel))->download('registroPersonal.xlsx');
     }
 }

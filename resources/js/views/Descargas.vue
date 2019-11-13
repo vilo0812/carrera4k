@@ -8,7 +8,7 @@
             <a class="btnDescarga" href="/descargar4K">Copa Bruno Carrasquel 4k</a>
         </div>
         <div class="hijo">
-            <form action="/descargaPersonal" name="formulario_envio" class="mensaje_form" method="post">
+            <form action="/descargaP" name="formulario_envio" class="mensaje_form" method="get">
                <h2>Descarga Personalizada</h2>
                <div>
             

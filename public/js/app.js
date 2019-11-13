@@ -37706,9 +37706,9 @@ var render = function() {
           {
             staticClass: "mensaje_form",
             attrs: {
-              action: "/descargaPersonal",
+              action: "/descargaP",
               name: "formulario_envio",
-              method: "post"
+              method: "get"
             }
           },
           [
