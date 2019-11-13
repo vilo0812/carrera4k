@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Direcciones;
+use App\Distancia;
 use App\Exports\ParticipantesExport;
+use App\Exports\RegistroPersonalExport;
 use App\Exports\RegistroPersonalizadoExport;
 use App\Exports\Registros4KExport;
 use App\Exports\RegistrosExport;
@@ -89,5 +91,13 @@ class Carrera4kController extends Controller
     }
     public function descargar4K(){
         return (new Registros4KExport)->download('registros4K.xlsx');
+    }
+    /*public function descargaPersonalizada(Request $personal){
+        return (new RegistroPersonalExport($personal['distancia'],$personal['plantel']))->download('registroPersonal.xlsx');
+    }*/
+    public function descargaP(){
+        $plantel = Planteles::wherePlantel('E B COLEGIO SAN JUAN BAUTISTA')->value('id');
+        $distancia =  Distancia::whereDistancia('Vuelta a la Manzana')->value('id');
+        return (new RegistroPersonalExport($distancia,$plantel))->download('registroPersonal.xlsx');
     }
 }

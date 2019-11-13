@@ -20,7 +20,9 @@ class Registro extends Model
         ->join("distancias","registros.distancia_id","=","distancias.id")
         ->join("tallas","registros.talla_id","=","tallas.id")
         ->join("planteles","registros.plantel_id","=","planteles.id")
-        ->select('participantes.nombre','participantes.apellido','participantes.cedula','participantes.edad','participantes.sexo','grados.grado','direcciones.direccion','planteles.plantel','distancias.distancia','tallas.zapato','tallas.pantalon','tallas.camisa')->where("registros.distancia_id","=","$distancia")->where("registros.plantel_id","=","$plantel")->get();
+        ->select('participantes.nombre','participantes.apellido','participantes.cedula','participantes.edad','participantes.sexo','grados.grado','direcciones.direccion','planteles.plantel','distancias.distancia','tallas.zapato','tallas.pantalon','tallas.camisa')
+        ->whereDistancia_id($distancia)
+        ->wherePlantel_id($plantel)->get();
         return $registro;
     }
     public function RegistrosByDistancia($id){
