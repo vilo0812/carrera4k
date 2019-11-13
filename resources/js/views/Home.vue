@@ -27,24 +27,19 @@
            <input type="text" name="nombre" id="nombre" placeholder="Introducir Nombre" :class="{' border-danger' : nombreError != null}"  v-model="nombre" minlength="3" maxlength="50" required>
        </div>
         <div class="input_group">
-<<<<<<< HEAD
-           <label for="apellido" id="labelApellido" class="label">Apellido: </label>
-            <input type="text" name="apellido" id="apellido" placeholder="Introducir Apellido" class="input_form" v-model="apellido" minlength="3" maxlength="50" required>
-=======
            <label for="apellido" id="labelApellido" class="label">Apellido:<span v-if="apellidoError != null" class="error">{{apellidoError}}</span> </label>
             <input type="text" name="apellido" id="apellido" placeholder="Introducir Apellido" class="input_form" :class="{' border-danger' : apellidoError != null}" v-model="apellido" minlength="3" maxlength="50" required>
->>>>>>> vilonk
          </div>
        <div class="input_group">
          <label for="cedula" id="labelCedula" class="label">Cédula ó Cédula estudiantil: <span v-if="cedulaError != null" class="error">{{cedulaError}}</span></label>
          <input type="text" name="cedula" id="cedula" placeholder="Introducir Cédula" :class="{' border-danger' : cedulaError != null}" v-model="cedula" minlength="6" maxlength="15" pattern="^([VEJPG]{1})([0-9]{7,9})$"required>
        </div>
        <div class="input_group">
-         <label for="plantel" id="labelPlantel"class="label">Plantel: <span v-if="plantelError != null" class="error">{{plantelError}}</span></label>
-            <select name="plantel" id="plantel" placeholder="Introducir Plantel" :class="{' border-danger' : plantelError != null}" v-model="plantel" minlength="3 " maxlength="100" required>
-                <option v-for="item of plantelOpciones">{{item}}</option>
-            </select>
-       </div>
+                     <label for="plantel" id="labelPlantel"class="label">Plantel: </label>
+                        <select name="plantel" id="plantel" placeholder="Introducir Plantel" :class="{' border-danger' : plantelError != null}" v-model="plantel" minlength="3 " maxlength="100" required>
+                            <option v-for="item of plantelOpciones">{{item}}</option>
+                        </select>
+                   </div>
        <div class="input_group">
          <label for="edad" id="labelEdad"class="label">Edad:<span v-if="edadError != null" class="error">{{edadError}}</span> </label>
          <input type="number" name="edad" id="edad" placeholder="Introducir Edad" :class="{' border-danger' : edadError != null}" v-model="edad" minlength="1" maxlength="2" required>
@@ -77,7 +72,7 @@
         </div>
         <div class="input_group">
               <label  for="distancia"  class="label">Distancia:<span v-if="distanciaError != null" class="error">{{distanciaError}}</span></label>
-             <select name="distancia" placeholder="introducir su distancia" :class="{' border-danger' : distanciaError != null}" v-model="distanciaCampo" required>
+             <select name="distancia" placeholder="introducir su distancia" :class="{' border-danger' : distanciaError != null}" v-model="distancia" required>
                 <option>{{distanciaOpcion}}</option>
               </select>
                 <!--<option>{{validacionDistancia}}</option>-->
@@ -110,7 +105,7 @@ export default {
     return {
     nombre:'',
     apellido:'',
-    cedula:'',
+    cedula:'V',
     plantel:'',
     plantelOpciones:'',
     edad:'',
@@ -229,11 +224,6 @@ export default {
 	       .then(res => {
 	         alert('registrado con exito');
 	       })
-
-
-
-
-
 
         }
       },

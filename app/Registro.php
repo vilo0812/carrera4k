@@ -13,19 +13,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Registro extends Model
 {
-<<<<<<< HEAD
-    /*public funtion n_competidor(){
-        $id = Registro::get()->last();
-    if($id == null){
-        $id = 1;
-    }else{
-        $id = $id->n_competidor;
-        $id = $id + 1;
-    }
-    }*/
-    /*public function RegistrosCompletos(){
-    	$registro = static::leftJoin("participantes","registros.participante_id","=","participantes.id")->join("grados","participantes.grado_id","=","grados.id")->join("direcciones","registros.direccion_id","=","direcciones.id")->join("distancias","registros.distancia_id","=","distancias.id")->join("tallas","registros.talla_id","=","tallas.id")->select('participantes.nombre','participantes.apellido','participantes.cedula','participantes.edad','participantes.sexo','grados.grado','direcciones.direccion','direcciones.plantel','distancias.distancia','tallas.zapato','tallas.pantalon','tallas.camisa')->get();
-=======
     public function RegistrosByDistanciaByPlantel($distancia,$plantel){
         $registro = static::leftJoin("participantes","registros.participante_id","=","participantes.id")
         ->join("grados","participantes.grado_id","=","grados.id")
@@ -56,7 +43,6 @@ class Registro extends Model
         ->join("tallas","registros.talla_id","=","tallas.id")
         ->join("planteles","registros.plantel_id","=","planteles.id")
         ->select('participantes.nombre','participantes.apellido','participantes.cedula','participantes.edad','participantes.sexo','grados.grado','direcciones.direccion','planteles.plantel','distancias.distancia','tallas.zapato','tallas.pantalon','tallas.camisa')->get();
->>>>>>> vilonk
     	return $registro;
     }
     public function registroCompletoById($id){
@@ -84,14 +70,10 @@ class Registro extends Model
     		"tallaCamisa" => $talla->camisa,
     	];
     	return $registrosCompleto;
-<<<<<<< HEAD
-    }//registra al usuario segun su $id
-=======
     }
     public function plantel(){
       return $this->belongsTo(Planteles::class);
     }
->>>>>>> vilonk
     public function distancia(){
       return $this->belongsTo(Distancia::class);
     }

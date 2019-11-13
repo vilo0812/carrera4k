@@ -52,9 +52,9 @@ class Carrera4kController extends Controller
         $plantel = Planteles::wherePlantel($registrosCompleto['plantel'])->value('id');//sacamos el id que le pertenece a el plantel que el usuario selecciono, ya que el id es lo que vamos a registrar
         $distancia_id = $registrosCompleto['distancia_id'];//sacamos el id de la distancia
         $n_competidor = $registro = Registro::wherePlantel_id($plantel)->whereDistancia_id($distancia_id)->get()->last();//sacamos el ultimo registro en el cual se hayan inscrito los participantes de la misma entidad publica y en la misma distancia de carrera
-        if($n_competidor->n_competidor == null){//verificamos el numero de competicion y le asigamos el siguiente numero de carrera
+        if($n_competidor == null){//verificamos el numero de competicion y le asigamos el siguiente numero de carrera
             $n_competidor = 1;
-        }else{
+        }       else{
             $n_competidor = $n_competidor->n_competidor + 1;
         }
         $registro = new Registro();
@@ -63,19 +63,11 @@ class Carrera4kController extends Controller
         $registro->distancia_id = $distancia_id;
         $registro->participante_id = $participante_id;
     	$registro->direcciones_id = $direccion_id;
-<<<<<<< HEAD
-    	$registro->talla_id = $tallas_id;
-        $registro->save();
-    	return "registrado exitosamente";
-	}//permite registrar a un usuario
-	public function mostrar(){
-=======
     	$registro->talla_id = $talla_id;//llenamos el objeto
         $registro->save();//registramos
     	return $registro;
 	}
 	public function mostrar(){//al final no la utilizamos //api ref que me permite mostrar toda la informacion de la base de datos
->>>>>>> vilonk
         $registro = new Registro();
         $todos = Registro::all();
         $resultado=[];
@@ -84,9 +76,7 @@ class Carrera4kController extends Controller
         array_push($resultado,$array);
         }
         return $resultado;
-<<<<<<< HEAD
-    }//permite mostrar la informacion de todos los usuarios participantes
-=======
+
     }
     public function descargarTodo(){
         //$todo=$this->mostrar();
@@ -111,5 +101,4 @@ class Carrera4kController extends Controller
         $distancia =  Distancia::whereDistancia($datos['distancia'])->value('id');
         return (new RegistroPersonalExport($distancia,$plantel))->download('registroPersonal.xlsx');
     }
->>>>>>> vilonk
 }

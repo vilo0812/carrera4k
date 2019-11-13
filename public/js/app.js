@@ -2051,11 +2051,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Home',
   data: function data() {
@@ -2064,7 +2059,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return _ref = {
       nombre: '',
       apellido: '',
-      cedula: '',
+      cedula: 'V',
       plantel: '',
       plantelOpciones: '',
       edad: '',
@@ -37974,46 +37969,6 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "input_group" }, [
-                    _vm._v("\n<<<<<<< HEAD\n           "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "label",
-                        attrs: { for: "apellido", id: "labelApellido" }
-                      },
-                      [_vm._v("Apellido: ")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.apellido,
-                          expression: "apellido"
-                        }
-                      ],
-                      staticClass: "input_form",
-                      attrs: {
-                        type: "text",
-                        name: "apellido",
-                        id: "apellido",
-                        placeholder: "Introducir Apellido",
-                        minlength: "3",
-                        maxlength: "50",
-                        required: ""
-                      },
-                      domProps: { value: _vm.apellido },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.apellido = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v("\n=======\n           "),
                     _c(
                       "label",
                       {
@@ -38059,8 +38014,7 @@ var render = function() {
                           _vm.apellido = $event.target.value
                         }
                       }
-                    }),
-                    _vm._v("\n>>>>>>> vilonk\n         ")
+                    })
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "input_group" }, [
@@ -38119,14 +38073,7 @@ var render = function() {
                         staticClass: "label",
                         attrs: { for: "plantel", id: "labelPlantel" }
                       },
-                      [
-                        _vm._v("Plantel: "),
-                        _vm.plantelError != null
-                          ? _c("span", { staticClass: "error" }, [
-                              _vm._v(_vm._s(_vm.plantelError))
-                            ])
-                          : _vm._e()
-                      ]
+                      [_vm._v("Plantel: ")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -38423,8 +38370,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.distanciaCampo,
-                            expression: "distanciaCampo"
+                            value: _vm.distancia,
+                            expression: "distancia"
                           }
                         ],
                         class: { " border-danger": _vm.distanciaError != null },
@@ -38443,7 +38390,7 @@ var render = function() {
                                 var val = "_value" in o ? o._value : o.value
                                 return val
                               })
-                            _vm.distanciaCampo = $event.target.multiple
+                            _vm.distancia = $event.target.multiple
                               ? $$selectedVal
                               : $$selectedVal[0]
                           }
