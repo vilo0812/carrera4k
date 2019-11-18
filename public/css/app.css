@@ -1,11 +1,7 @@
 
 *[data-v-63cd6604], *[data-v-63cd6604]:before, *[data-v-63cd6604]:after {
   box-sizing: border-box;
-}
-.error[data-v-63cd6604]{
-  color:red;
-}
-.border-danger[data-v-63cd6604]{
+}.border-danger[data-v-63cd6604]{
   border-color:red;
 }
 .fade-enter-active[data-v-63cd6604], .fade-leave-active[data-v-63cd6604] {

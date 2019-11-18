@@ -1951,9 +1951,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
 //
 //
 //
@@ -2054,12 +2051,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Home',
   data: function data() {
-    var _ref;
-
-    return _ref = {
+    return {
       nombre: '',
       apellido: '',
-      cedula: 'V',
+      cedula: '',
       plantel: '',
       plantelOpciones: '',
       edad: '',
@@ -2071,28 +2066,174 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       pantalon: '',
       camisa: '',
       recomendacion: true,
-      formulario: false,
-      verificacionPaternal: '',
+      representante: '',
       opciones: ['Mini Carrera Atlética', 'Vuelta a la Manzana', 'Copa Bruno Carrasquel 4k'],
       distancia_id: '',
       grado_id: '',
-      errorNombreActivar: '',
-      errorApellidoActivar: '',
-      errorCedulaActivar: '',
-      errorPlantelActivar: '',
-      errorEdadActivar: '',
-      errorSexoActivar: '',
-      errorDireccionActivar: '',
-      errorGradoActivar: ''
-    }, _defineProperty(_ref, "errorDireccionActivar", ''), _defineProperty(_ref, "errorGradoActivar", ''), _defineProperty(_ref, "errorDistanciaActivar", ''), _ref;
+      formulario: false,
+      errorNombre: null,
+      errorApellido: null,
+      errorCedula: null,
+      errorLetras: null,
+      errorPlantel: null,
+      errorEdad: null,
+      errorSexo: null,
+      errorDireccion: null,
+      errorGrado: null,
+      errorDistancia: null,
+      errorTallaZapato: null,
+      errorTallaPantalon: null,
+      errorTallaCamisa: null,
+      errorRepresentante: null,
+      permisoRegistro: true
+    };
   },
   methods: {
-    registro: function registro() {
-      if (this.nombre.trim() === '' || this.apellido.trim() === '' || this.cedula.trim() === '' || this.plantel.trim() === '' || this.plantel.trim() === '' || this.edad.trim() === '' || this.sexo.trim() === '' || this.direccion.trim() === '' || this.grado.trim() === '' || this.distancia.trim() === '') {
-        alert('Debes completar todos los campos antes de registrarte');
-        return;
+    validar: function validar() {
+      if (this.nombre.trim() == '') {
+        this.validarNombre();
+        this.permisoRegistro = false;
       }
 
+      if (this.nombre.length < 3) {
+        this.validarNombre();
+        this.permisoRegistro = false;
+      }
+
+      if (this.nombre.length > 50) {
+        this.validarNombre();
+        this.permisoRegistro = false;
+      }
+
+      if (this.apellido.trim() == '') {
+        this.validarApellido();
+        this.permisoRegistro = false;
+      }
+
+      if (this.apellido.length < 3) {
+        this.validarApellido();
+        this.permisoRegistro = false;
+      }
+
+      if (this.apellido.length > 50) {
+        this.validarApellido();
+        this.permisoRegistro = false;
+      }
+
+      if (this.cedula.trim() == '') {
+        this.validarCedula();
+        this.permisoRegistro = false;
+      }
+
+      if (this.cedula.length > 18) {
+        this.validarCedula();
+        this.permisoRegistro = false;
+      }
+
+      if (this.cedula.length < 7) {
+        this.validarCedula();
+        this.permisoRegistro = false;
+      }
+
+      if (this.plantel.trim() == '') {
+        this.validarPlantel();
+        this.permisoRegistro = false;
+      }
+
+      if (this.edad <= 4) {
+        this.validarEdad();
+        this.permisoRegistro = false;
+      }
+
+      if (this.edad > 22) {
+        this.validarEdad();
+        this.permisoRegistro = false;
+      }
+
+      if (this.sexo.trim() == '') {
+        this.validarSexo();
+        this.permisoRegistro = false;
+      }
+
+      if (this.direccion.length < 3) {
+        this.validarDireccion();
+        this.permisoRegistro = false;
+      }
+
+      if (this.direccion.length > 150) {
+        this.validarDireccion();
+        this.permisoRegistro = false;
+      }
+
+      if (this.grado.trim() == '') {
+        this.validarGrado();
+        this.permisoRegistro = false;
+      }
+
+      if (this.distancia.trim() == '') {
+        this.validarDistancia();
+        this.permisoRegistro = false;
+      }
+
+      if (this.zapato < 20 && this.grado.trim() == 'Inicial') {
+        this.validarTallaZapato();
+        this.permisoRegistro = false;
+      }
+
+      if (this.zapato > 46 && this.grado.trim() == 'Inicial') {
+        this.validarTallaZapato();
+        this.permisoRegistro = false;
+      }
+
+      if (this.pantalon < 3 && this.grado.trim() == 'Inicial') {
+        this.validarTallaPantalon();
+        this.permisoRegistro = false;
+      }
+
+      if (this.pantalon > 40 && this.grado.trim() == 'Inicial') {
+        this.validarTallaPantalon();
+        this.permisoRegistro = false;
+      }
+
+      if (this.camisa < 3 && this.grado.trim() == 'Inicial') {
+        this.validarTallaCamisa();
+        this.permisoRegistro = false;
+      }
+
+      if (this.camisa > 40 && this.grado.trim() == 'Inicial') {
+        this.validarTallaCamisa();
+        this.permisoRegistro = false;
+      }
+
+      if (!this.representante) {
+        this.validarRepresentante();
+        this.permisoRegistro = false;
+      }
+
+      if (this.cedula.split('')) {
+        var letrasCedula = this.cedula.split('');
+        var numero = " / - V 0 1 2 3 4 5 6 7 8 9";
+        var i;
+
+        for (i in letrasCedula) {
+          if (numero.indexOf(letrasCedula[i]) == -1) {
+            this.errorLetras = true;
+            this.errorCedula = true;
+            this.permisoRegistro = false;
+          } else {
+            this.errorLetras = null;
+            this.errorCedula = null;
+          }
+        }
+      }
+
+      if (this.permisoRegistro) {
+        this.registro();
+      } else {
+        alert('error al registrar');
+      }
+    },
+    registro: function registro() {
       switch (this.distancia) {
         case 'Mini Carrera Atlética':
           this.distancia_id = 1;
@@ -2170,7 +2311,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         distancia_id: this.distancia_id,
         //no tengo el valor direccion_id upppsss
         zapato: this.zapato,
-        pantalon: this.zapato,
+        pantalon: this.pantalon,
         camisa: this.camisa
       }; // console.log(params);
 
@@ -2178,6 +2319,150 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.post(url, params).then(function (res) {
         alert('registrado con exito');
       });
+    },
+    validarNombre: function validarNombre() {
+      var val = this.nombre.trim();
+
+      if (val == '') {
+        this.errorNombre = true;
+      } else if (val.length < 3) {
+        this.errorNombre = true;
+      } else if (val.length > 50) {
+        this.errorNombre = true;
+      } else {
+        this.errorNombre = false;
+      }
+    },
+    //errorApellido
+    validarApellido: function validarApellido() {
+      var val = this.apellido.trim();
+
+      if (val == '') {
+        this.errorApellido = true;
+      } else if (val.length < 3) {
+        this.errorApellido = true;
+      } else if (val.length > 50) {
+        this.errorApellido = true;
+      } else {
+        this.errorApellido = false;
+      }
+    },
+    validarCedula: function validarCedula() {
+      var val = this.cedula.trim();
+      this.errorLetras = null;
+      this.errorCedula = null;
+
+      if (val == '') {
+        this.errorCedula = true;
+      } else if (val.length < 7) {
+        this.errorCedula = true;
+      } else if (val.length > 18) {
+        this.errorCedula = true;
+      } else if (this.cedula.split('')) {
+        var letrasCedula = this.cedula.split('');
+        var numero = "/ - V 0 1 2 3 4 5 6 7 8 9";
+        var i;
+
+        for (i in letrasCedula) {
+          if (numero.indexOf(letrasCedula[i]) == -1) {
+            this.errorLetras = true;
+            this.errorCedula = true;
+            return;
+          } else {
+            this.errorLetras = null;
+            this.errorCedula = null;
+          }
+        }
+      } else {
+        this.errorCedula = false;
+      }
+    },
+    validarPlantel: function validarPlantel() {
+      var val = this.plantel.trim();
+
+      if (val == '') {
+        this.errorPlantel = true;
+      } else {
+        this.errorPlantel = false;
+      }
+    },
+    validarEdad: function validarEdad() {
+      //return 'no puedes ser menor a tres años'
+      if (this.edad <= 4) {
+        this.errorEdad = true;
+      } else if (this.edad > 22) {
+        this.errorEdad = true;
+      } else {
+        this.errorEdad = false;
+      }
+    },
+    validarSexo: function validarSexo() {
+      if (this.sexo.trim() == '') {
+        this.errorSexo = true;
+      } else {
+        this.errorSexo = false;
+      }
+    },
+    validarDireccion: function validarDireccion() {
+      if (this.direccion.length < 3) {
+        this.errorDireccion = true;
+      } else if (this.direccion.length > 50) {
+        this.errorDireccion = true;
+      } else {
+        this.errorDireccion = false;
+      }
+    },
+    validarGrado: function validarGrado() {
+      var val = this.grado.trim();
+
+      if (val == '') {
+        this.errorGrado = true;
+      } else {
+        this.errorGrado = false;
+      }
+    },
+    validarDistancia: function validarDistancia() {
+      var val = this.distancia.trim();
+
+      if (val == '') {
+        this.errorDistancia = true;
+      } else {
+        this.errorDistancia = false;
+      }
+    },
+    validarTallaZapato: function validarTallaZapato() {
+      if (this.zapato < 20) {
+        this.errorTallaZapato = true;
+      } else if (this.zapato > 46) {
+        this.errorTallaZapato = true;
+      } else {
+        this.errorTallaZapato = false;
+      }
+    },
+    validarTallaPantalon: function validarTallaPantalon() {
+      if (this.pantalon < 3) {
+        this.errorTallaPantalon = true;
+      } else if (this.pantalon > 40) {
+        this.errorTallaPantalon = true;
+      } else {
+        this.errorTallaPantalon = false;
+      }
+    },
+    validarTallaCamisa: function validarTallaCamisa() {
+      if (this.camisa < 3) {
+        this.errorTallaCamisa = true;
+      } else if (this.camisa > 40) {
+        this.errorTallaCamisa = true;
+      } else {
+        this.errorTallaCamisa = false;
+      }
+    },
+    validarRepresentante: function validarRepresentante() {
+      if (!this.representante) {
+        this.errorRepresentante = true;
+      } else {
+        this.errorRepresentante = false;
+      }
     }
   },
   computed: {
@@ -2195,150 +2480,153 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return sugerencia;
       }
     },
-    nombreError: function nombreError() {
+    requerimientosNombre: function requerimientosNombre() {
       var val = this.nombre.trim();
 
       if (val == '') {
+        return "por favor introduzca su nombre";
+      } else if (val.length < 3) {
+        return "por favor introduzca un nombre de al menos tres letras";
+      } else if (val.length > 50) {
+        return "por favor introduzca un nombre menor a cincuenta letras";
+      } else {
         return null;
       }
-
-      if (val.length < 3) {
-        return 'por favor introduce un nombre más largo';
-      }
-
-      if (val.length > 50) {
-        return 'has excedido la cantidad de caracteres';
-      }
-
-      return null;
     },
-    apellidoError: function apellidoError() {
+    requerimientosApellido: function requerimientosApellido() {
       var val = this.apellido.trim();
 
       if (val == '') {
+        return "por favor introduzca su apellido";
+      } else if (val.length < 3) {
+        return "por favor introduzca un apellido de al menos tres letras";
+      } else if (val.length > 150) {
+        return "por favor introduzca un apellido menor a cincuenta letras";
+      } else {
         return null;
       }
-
-      if (val.length < 3) {
-        return 'por favor introduce un apellido más largo';
-      }
-
-      if (val.length > 50) {
-        return 'has excedido la cantidad de caracteres';
-      }
-
-      return null;
     },
-    cedulaError: function cedulaError() {
+    requerimientosCedula: function requerimientosCedula() {
       var val = this.cedula.trim();
 
       if (val == '') {
+        return "por favor introduzca su cedula";
+      } else if (val.length > 18) {
+        return "por favor introduzca una cedula más corta cedula";
+      } else if (this.errorLetras) {
+        return "por favor introduzca el formato correcto";
+      } else if (val.length < 7) {
+        return "su cedula es muy corta";
+      } else {
         return null;
-      }
-
-      if (val == 1) {
-        return null;
-      }
-
-      if (val.length < 6 && this.cedula == null) {
-        return 'por favor introduce una cédula más larga';
-      }
-
-      if (val.length > 15) {
-        return 'has excedido la cantidad de caracteres';
       }
     },
-    plantelError: function plantelError() {
+    requerimientosPlantel: function requerimientosPlantel() {
       var val = this.plantel.trim();
 
       if (val == '') {
-        return null;
-      }
-
-      if (val.length < 3) {
-        return 'por favor introduzca un plantel más largo';
-      }
-
-      if (val.length > 100) {
-        return 'has excedido la cantidad de caracteres';
-      }
-    },
-    edadError: function edadError() {
-      if (this.edad < 3 && this.edad == null) {
-        return 'no puedes ser menor a tres años';
-      }
-
-      if (this.edad < 2 && this.edad == null) {
-        return 'no puedes ser menor a dos años';
-      }
-
-      if (this.edad < 1 && this.edad == null) {
-        return 'no puedes ser menor a un años';
-      }
-
-      if (this.edad < 0 && this.edad == null) {
-        return 'no puedes no haber nacido';
-      }
-
-      if (this.edad > 21) {
-        return 'no puedes ser mayor a veinte años';
-      }
-
-      var val = this.edad.trim();
-
-      if (val == '') {
+        return "por favor elija su plantel";
+      } else {
         return null;
       }
     },
-    sexoError: function sexoError() {
+    requerimientosEdad: function requerimientosEdad() {
+      if (this.edad == 0) {
+        return 'por favor introdusca su edad';
+      } else if (this.edad <= 4) {
+        return 'no puedes ser menor a cuatro años';
+      } else if (this.edad > 22) {
+        return 'no puedes ser mayor de Veintidós años';
+      } else {
+        return null;
+      }
+    },
+    requerimientosSexo: function requerimientosSexo() {
       var val = this.sexo.trim();
 
       if (val == '') {
+        return "por favor seleccione su tipo de sexo";
+      } else {
         return null;
       }
     },
-    direccionError: function direccionError() {
-      var val = this.direccion.trim();
-
-      if (val == '') {
-        return null;
-      }
-
-      if (val.length < 3) {
+    requerimientosDireccion: function requerimientosDireccion() {
+      if (this.direccion.length == 0) {
+        return 'por favor introdusca su dirección';
+      } else if (this.direccion.length < 3) {
         return 'por favor introdusca una dirección más larga';
-      }
-
-      if (val.length > 150) {
-        return 'has excedido la cantidad de caracteres';
+      } else if (this.direccion.length > 150) {
+        return 'por favor introdusca una dirección más corta';
+      } else {
+        return null;
       }
     },
-    gradoError: function gradoError() {
+    requerimientosGrado: function requerimientosGrado() {
       var val = this.grado.trim();
 
       if (val == '') {
+        return "por favor elija su grado";
+      } else {
         return null;
       }
     },
-    distanciaError: function distanciaError() {
+    requerimientosTallaZapato: function requerimientosTallaZapato() {
+      if (this.zapato == 0) {
+        return 'por favor introdusca su talla de zapato';
+      } else if (this.zapato < 20) {
+        return 'su talla no puede ser menor a veinte';
+      } else if (this.zapato > 46) {
+        return 'su talla no puede ser mayor a cuarentiseis';
+      } else {
+        return null;
+      }
+    },
+    requerimientosTallaPantalon: function requerimientosTallaPantalon() {
+      if (this.pantalon == 0) {
+        return 'por favor introdusca su talla de pantalon';
+      } else if (this.pantalon < 3) {
+        return 'su talla no puede ser menor a tres';
+      } else if (this.pantalon > 40) {
+        return 'su talla no puede ser mayor a cuarenta';
+      } else {
+        return null;
+      }
+    },
+    requerimientosTallaCamisa: function requerimientosTallaCamisa() {
+      if (this.pantalon == 0) {
+        return 'por favor introdusca su talla de camisa';
+      } else if (this.pantalon < 3) {
+        return 'su talla no puede ser menor a tres';
+      } else if (this.pantalon > 40) {
+        return 'su talla no puede ser mayor a cuarenta';
+      } else {
+        return null;
+      }
+    },
+    requerimientosRepresentante: function requerimientosRepresentante() {
+      if (!this.representante) {
+        return 'campo obligatorio';
+      } else {
+        return null;
+      }
+    },
+    requerimientosDistancia: function requerimientosDistancia() {
       var val = this.distancia.trim();
 
       if (val == '') {
+        return "por favor elija su distancia a recorrer";
+      } else {
         return null;
       }
-    },
-    representanteError: function representanteError() {
-      if (this.representante === false) {
-        return 'debe estar bajo la supervisión de su representante';
-      }
-    },
-    created: function created() {
-      var _this = this;
-
-      var url = "http://127.0.0.1:8000/api/planteles";
-      axios.get(url).then(function (res) {
-        _this.plantelOpciones = res.data;
-      });
     }
+  },
+  created: function created() {
+    var _this = this;
+
+    var url = "http://127.0.0.1:8000/api/planteles";
+    axios.get(url).then(function (res) {
+      _this.plantelOpciones = res.data;
+    });
   }
 });
 
@@ -37904,511 +38192,43 @@ var render = function() {
       _vm._v(" "),
       _vm.formulario
         ? _c("transition", { attrs: { name: "fade" } }, [
-            _c(
-              "form",
-              {
-                staticClass: "mensaje_form",
-                attrs: { action: "", name: "formulario_envio", method: "post" },
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    return _vm.registro($event)
-                  }
-                }
-              },
-              [
-                _c("h2", [_vm._v("Registro de Carrera 4k")]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("div", { staticClass: "input_group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "label",
-                        attrs: { for: "nombre", id: "labelNombre" }
-                      },
-                      [
-                        _vm._v("Nombre: "),
-                        _vm.nombreError != null
-                          ? _c("span", { staticClass: "error" }, [
-                              _vm._v(_vm._s(_vm.nombreError))
-                            ])
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.nombre,
-                          expression: "nombre"
-                        }
-                      ],
-                      class: { " border-danger": _vm.nombreError != null },
-                      attrs: {
-                        type: "text",
-                        name: "nombre",
-                        id: "nombre",
-                        placeholder: "Introducir Nombre",
-                        minlength: "3",
-                        maxlength: "50",
-                        required: ""
-                      },
-                      domProps: { value: _vm.nombre },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.nombre = $event.target.value
-                        }
+            _vm.formulario
+              ? _c(
+                  "form",
+                  {
+                    staticClass: "mensaje_form",
+                    attrs: {
+                      action: "",
+                      name: "formulario_envio",
+                      method: "post",
+                      id: "formulario_envio"
+                    },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.validar($event)
                       }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input_group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "label",
-                        attrs: { for: "apellido", id: "labelApellido" }
-                      },
-                      [
-                        _vm._v("Apellido:"),
-                        _vm.apellidoError != null
-                          ? _c("span", { staticClass: "error" }, [
-                              _vm._v(_vm._s(_vm.apellidoError))
-                            ])
-                          : _vm._e()
-                      ]
-                    ),
+                    }
+                  },
+                  [
+                    _c("h2", [_vm._v("Registro de Carrera Atlética")]),
                     _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.apellido,
-                          expression: "apellido"
-                        }
-                      ],
-                      staticClass: "input_form",
-                      class: { " border-danger": _vm.apellidoError != null },
-                      attrs: {
-                        type: "text",
-                        name: "apellido",
-                        id: "apellido",
-                        placeholder: "Introducir Apellido",
-                        minlength: "3",
-                        maxlength: "50",
-                        required: ""
-                      },
-                      domProps: { value: _vm.apellido },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.apellido = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input_group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "label",
-                        attrs: { for: "cedula", id: "labelCedula" }
-                      },
-                      [
-                        _vm._v("Cédula ó Cédula estudiantil: "),
-                        _vm.cedulaError != null
-                          ? _c("span", { staticClass: "error" }, [
-                              _vm._v(_vm._s(_vm.cedulaError))
-                            ])
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.cedula,
-                          expression: "cedula"
-                        }
-                      ],
-                      class: { " border-danger": _vm.cedulaError != null },
-                      attrs: {
-                        type: "text",
-                        name: "cedula",
-                        id: "cedula",
-                        placeholder: "Introducir Cédula",
-                        minlength: "6",
-                        maxlength: "15",
-                        pattern: "^([VEJPG]{1})([0-9]{7,9})$",
-                        required: ""
-                      },
-                      domProps: { value: _vm.cedula },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.cedula = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input_group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "label",
-                        attrs: { for: "plantel", id: "labelPlantel" }
-                      },
-                      [_vm._v("Plantel: ")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.plantel,
-                            expression: "plantel"
-                          }
-                        ],
-                        class: { " border-danger": _vm.plantelError != null },
-                        attrs: {
-                          name: "plantel",
-                          id: "plantel",
-                          placeholder: "Introducir Plantel",
-                          minlength: "3 ",
-                          maxlength: "100",
-                          required: ""
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.plantel = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      _vm._l(_vm.plantelOpciones, function(item) {
-                        return _c("option", [_vm._v(_vm._s(item))])
-                      }),
-                      0
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input_group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "label",
-                        attrs: { for: "edad", id: "labelEdad" }
-                      },
-                      [
-                        _vm._v("Edad:"),
-                        _vm.edadError != null
-                          ? _c("span", { staticClass: "error" }, [
-                              _vm._v(_vm._s(_vm.edadError))
-                            ])
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.edad,
-                          expression: "edad"
-                        }
-                      ],
-                      class: { " border-danger": _vm.edadError != null },
-                      attrs: {
-                        type: "number",
-                        name: "edad",
-                        id: "edad",
-                        placeholder: "Introducir Edad",
-                        minlength: "1",
-                        maxlength: "2",
-                        required: ""
-                      },
-                      domProps: { value: _vm.edad },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.edad = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input_group" }, [
-                    _vm.sexoError != null
-                      ? _c("span", { staticClass: "error" }, [
-                          _vm._v(_vm._s(_vm.sexoError))
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("Masculino")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.sexo,
-                          expression: "sexo"
-                        }
-                      ],
-                      staticClass: "input_form",
-                      attrs: {
-                        type: "radio",
-                        name: "sexo",
-                        id: "sexo",
-                        value: "masculino"
-                      },
-                      domProps: { checked: _vm._q(_vm.sexo, "masculino") },
-                      on: {
-                        change: function($event) {
-                          _vm.sexo = "masculino"
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("Femenino")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.sexo,
-                          expression: "sexo"
-                        }
-                      ],
-                      staticClass: "input_form",
-                      attrs: {
-                        type: "radio",
-                        name: "sexo",
-                        id: "sexo",
-                        value: "femenino",
-                        required: ""
-                      },
-                      domProps: { checked: _vm._q(_vm.sexo, "femenino") },
-                      on: {
-                        change: function($event) {
-                          _vm.sexo = "femenino"
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input_group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "label",
-                        attrs: { for: "direccion", id: "direccion" }
-                      },
-                      [
-                        _vm._v("Dirección: "),
-                        _vm.direccionError != null
-                          ? _c("span", { staticClass: "error" }, [
-                              _vm._v(_vm._s(_vm.direccionError))
-                            ])
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.direccion,
-                          expression: "direccion"
-                        }
-                      ],
-                      class: { " border-danger": _vm.direccionError != null },
-                      attrs: {
-                        for: "",
-                        name: "direccion",
-                        placeholder: "Introducir Dirección",
-                        minlength: "3",
-                        maxlength: "150",
-                        required: ""
-                      },
-                      domProps: { value: _vm.direccion },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.direccion = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input_group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "label",
-                        attrs: { for: "grado", id: "grado" }
-                      },
-                      [
-                        _vm._v("Grado: "),
-                        _vm.gradoError != null
-                          ? _c("span", { staticClass: "error" }, [
-                              _vm._v(_vm._s(_vm.gradoError))
-                            ])
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.grado,
-                            expression: "grado"
-                          }
-                        ],
-                        class: { " border-danger": _vm.gradoError != null },
-                        attrs: {
-                          name: "grado",
-                          placeholder: "introducir su grado",
-                          required: ""
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.grado = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [
-                        _c("option", [_vm._v("Inicial")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("4to GRADO")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("5to GRADO")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("6to GRADO")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("1er AÑO")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("2do AÑO")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("3er AÑO")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("4to AÑO")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("5to AÑO")]),
-                        _vm._v(" "),
-                        _c("option", [_vm._v("6to AÑO")])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input_group" }, [
-                    _c(
-                      "label",
-                      { staticClass: "label", attrs: { for: "distancia" } },
-                      [
-                        _vm._v("Distancia:"),
-                        _vm.distanciaError != null
-                          ? _c("span", { staticClass: "error" }, [
-                              _vm._v(_vm._s(_vm.distanciaError))
-                            ])
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.distancia,
-                            expression: "distancia"
-                          }
-                        ],
-                        class: { " border-danger": _vm.distanciaError != null },
-                        attrs: {
-                          name: "distancia",
-                          placeholder: "introducir su distancia",
-                          required: ""
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.distancia = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [_c("option", [_vm._v(_vm._s(_vm.distanciaOpcion))])]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm.grado == "Inicial"
-                    ? _c("div", [
+                    _c("div", [
+                      _c("div", { staticClass: "input_group" }, [
                         _c(
                           "label",
                           {
                             staticClass: "label",
-                            attrs: { for: "tallaZapato" }
+                            attrs: { for: "nombre", id: "labelNombre" }
                           },
-                          [_vm._v("Talla de Zapatos:")]
+                          [
+                            _vm._v("Nombre: "),
+                            _vm.errorNombre
+                              ? _c("span", { staticClass: "red--text" }, [
+                                  _vm._v(_vm._s(_vm.requerimientosNombre))
+                                ])
+                              : _vm._e()
+                          ]
                         ),
                         _vm._v(" "),
                         _c("input", {
@@ -38416,179 +38236,694 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.zapato,
-                              expression: "zapato"
+                              value: _vm.nombre,
+                              expression: "nombre"
                             }
                           ],
-                          staticClass: "input_form",
+                          class: { " border-danger": _vm.errorNombre },
                           attrs: {
-                            type: "number",
-                            name: "tallaZapato",
-                            id: "tallaZapato",
-                            maxlength: "20",
-                            pattern: "[0-40]{8}",
-                            required: ""
+                            type: "text",
+                            name: "nombre",
+                            id: "nombre",
+                            placeholder: "Introducir Nombre"
                           },
-                          domProps: { value: _vm.zapato },
+                          domProps: { value: _vm.nombre },
                           on: {
+                            blur: _vm.validarNombre,
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.zapato = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            staticClass: "label",
-                            attrs: { for: "tallaPantalon" }
-                          },
-                          [_vm._v("Talla de Pantalón:")]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pantalon,
-                              expression: "pantalon"
-                            }
-                          ],
-                          staticClass: "input_form",
-                          attrs: {
-                            type: "number",
-                            name: "tallaPantalon",
-                            id: "tallaPantalon",
-                            maxlength: "20",
-                            pattern: "[0-40]{8}",
-                            required: ""
-                          },
-                          domProps: { value: _vm.pantalon },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.pantalon = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            staticClass: "label",
-                            attrs: { for: "tallaCamisa" }
-                          },
-                          [_vm._v("Talla de Camisa:")]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.camisa,
-                              expression: "camisa"
-                            }
-                          ],
-                          staticClass: "input_form",
-                          attrs: {
-                            type: "number",
-                            name: "tallaCamisa",
-                            id: "tallaCamisa",
-                            maxlength: "20",
-                            pattern: "[0-40]{8}",
-                            require: ""
-                          },
-                          domProps: { value: _vm.camisa },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.camisa = $event.target.value
+                              _vm.nombre = $event.target.value
                             }
                           }
                         })
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "checkbox" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.verificacionPaternal,
-                          expression: "verificacionPaternal"
-                        }
-                      ],
-                      staticClass: "input_form",
-                      attrs: {
-                        type: "checkbox",
-                        name: "autorizacion",
-                        id: "autorizacion",
-                        required: ""
-                      },
-                      domProps: {
-                        checked: Array.isArray(_vm.verificacionPaternal)
-                          ? _vm._i(_vm.verificacionPaternal, null) > -1
-                          : _vm.verificacionPaternal
-                      },
-                      on: {
-                        change: function($event) {
-                          var $$a = _vm.verificacionPaternal,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = null,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                (_vm.verificacionPaternal = $$a.concat([$$v]))
-                            } else {
-                              $$i > -1 &&
-                                (_vm.verificacionPaternal = $$a
-                                  .slice(0, $$i)
-                                  .concat($$a.slice($$i + 1)))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input_group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "label",
+                            attrs: { for: "apellido", id: "labelApellido" }
+                          },
+                          [
+                            _vm._v("Apellido:"),
+                            _vm.errorApellido
+                              ? _c("span", { staticClass: "red--text" }, [
+                                  _vm._v(_vm._s(_vm.requerimientosApellido))
+                                ])
+                              : _vm._e()
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.apellido,
+                              expression: "apellido"
                             }
-                          } else {
-                            _vm.verificacionPaternal = $$c
+                          ],
+                          staticClass: "input_form",
+                          class: { " border-danger": _vm.errorApellido },
+                          attrs: {
+                            type: "text",
+                            name: "apellido",
+                            id: "apellido",
+                            placeholder: "Introducir Apellido"
+                          },
+                          domProps: { value: _vm.apellido },
+                          on: {
+                            blur: _vm.validarApellido,
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.apellido = $event.target.value
+                            }
                           }
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "label", attrs: { for: "tallaZapato" } },
-                      [
-                        _vm._v(
-                          "Confirmo que estoy bajo la autorización de mis padres"
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input_group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "label",
+                            attrs: { for: "cedula", id: "labelCedula" }
+                          },
+                          [
+                            _vm._v("Cédula ó Cédula estudiantil: "),
+                            _vm.errorCedula
+                              ? _c("span", { staticClass: "red--text" }, [
+                                  _vm._v(_vm._s(_vm.requerimientosCedula))
+                                ])
+                              : _vm._e()
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.cedula,
+                              expression: "cedula"
+                            }
+                          ],
+                          class: { " border-danger": _vm.errorCedula },
+                          attrs: {
+                            type: "text",
+                            name: "cedula",
+                            id: "cedula",
+                            placeholder: "Introducir Cédula"
+                          },
+                          domProps: { value: _vm.cedula },
+                          on: {
+                            blur: _vm.validarCedula,
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.cedula = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input_group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "label",
+                            attrs: { for: "plantel", id: "labelPlantel" }
+                          },
+                          [
+                            _vm._v("Plantel: "),
+                            _vm.errorPlantel
+                              ? _c("span", { staticClass: "red--text" }, [
+                                  _vm._v(_vm._s(_vm.requerimientosPlantel))
+                                ])
+                              : _vm._e()
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.plantel,
+                                expression: "plantel"
+                              }
+                            ],
+                            class: { " border-danger": _vm.errorPlantel },
+                            attrs: {
+                              name: "plantel",
+                              id: "plantel",
+                              placeholder: "Introducir Plantel"
+                            },
+                            on: {
+                              blur: _vm.validarPlantel,
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.plantel = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          _vm._l(_vm.plantelOpciones, function(item) {
+                            return _c("option", [_vm._v(_vm._s(item))])
+                          }),
+                          0
                         )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      attrs: {
-                        id: "mensaje_btn",
-                        type: "submit",
-                        value: "registrar"
-                      }
-                    },
-                    [_vm._v("Registrar")]
-                  )
-                ])
-              ]
-            )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input_group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "label",
+                            attrs: { for: "edad", id: "labelEdad" }
+                          },
+                          [
+                            _vm._v("Edad:"),
+                            _vm.errorEdad
+                              ? _c("span", { staticClass: "red--text" }, [
+                                  _vm._v(_vm._s(_vm.requerimientosEdad))
+                                ])
+                              : _vm._e()
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.edad,
+                              expression: "edad"
+                            }
+                          ],
+                          class: { " border-danger": _vm.errorEdad },
+                          attrs: {
+                            type: "number",
+                            name: "edad",
+                            id: "edad",
+                            placeholder: "Introducir Edad"
+                          },
+                          domProps: { value: _vm.edad },
+                          on: {
+                            blur: _vm.validarEdad,
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.edad = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input_group" }, [
+                        _vm.errorSexo
+                          ? _c("span", { staticClass: "red--text" }, [
+                              _vm._v(_vm._s(_vm.requerimientosSexo))
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("p", [_vm._v("Masculino")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.sexo,
+                              expression: "sexo"
+                            }
+                          ],
+                          staticClass: "input_form",
+                          class: { " border-danger": _vm.errorSexo },
+                          attrs: {
+                            type: "radio",
+                            name: "sexo",
+                            id: "sexo",
+                            value: "masculino"
+                          },
+                          domProps: { checked: _vm._q(_vm.sexo, "masculino") },
+                          on: {
+                            change: function($event) {
+                              _vm.sexo = "masculino"
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("p", [_vm._v("Femenino")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.sexo,
+                              expression: "sexo"
+                            }
+                          ],
+                          staticClass: "input_form",
+                          class: { " border-danger": _vm.errorSexo },
+                          attrs: {
+                            type: "radio",
+                            name: "sexo",
+                            id: "sexo",
+                            value: "femenino"
+                          },
+                          domProps: { checked: _vm._q(_vm.sexo, "femenino") },
+                          on: {
+                            change: function($event) {
+                              _vm.sexo = "femenino"
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input_group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "label",
+                            attrs: { for: "direccion", id: "direccion" }
+                          },
+                          [
+                            _vm._v("Dirección: "),
+                            _vm.errorDireccion
+                              ? _c("span", { staticClass: "red--text" }, [
+                                  _vm._v(_vm._s(_vm.requerimientosDireccion))
+                                ])
+                              : _vm._e()
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.direccion,
+                              expression: "direccion"
+                            }
+                          ],
+                          class: { " border-danger": _vm.errorDireccion },
+                          attrs: {
+                            for: "",
+                            name: "direccion",
+                            placeholder: "Introducir Dirección"
+                          },
+                          domProps: { value: _vm.direccion },
+                          on: {
+                            blur: _vm.validarDireccion,
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.direccion = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input_group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "label",
+                            attrs: { for: "grado", id: "grado" }
+                          },
+                          [
+                            _vm._v("Grado: "),
+                            _vm.errorGrado
+                              ? _c("span", { staticClass: "red--text" }, [
+                                  _vm._v(_vm._s(_vm.requerimientosGrado))
+                                ])
+                              : _vm._e()
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.grado,
+                                expression: "grado"
+                              }
+                            ],
+                            class: { " border-danger": _vm.errorGrado },
+                            attrs: {
+                              name: "grado",
+                              placeholder: "introducir su grado"
+                            },
+                            on: {
+                              blur: _vm.validarGrado,
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.grado = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c("option", [_vm._v("Inicial")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("4to GRADO")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("5to GRADO")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("6to GRADO")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("1er AÑO")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("2do AÑO")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("3er AÑO")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("4to AÑO")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("5to AÑO")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("6to AÑO")])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input_group" }, [
+                        _c(
+                          "label",
+                          { staticClass: "label", attrs: { for: "distancia" } },
+                          [
+                            _vm._v("Distancia:"),
+                            _vm.errorDistancia
+                              ? _c("span", { staticClass: "red--text" }, [
+                                  _vm._v(_vm._s(_vm.requerimientosDistancia))
+                                ])
+                              : _vm._e()
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.distancia,
+                                expression: "distancia"
+                              }
+                            ],
+                            class: { " border-danger": _vm.errorDistancia },
+                            attrs: {
+                              name: "distancia",
+                              placeholder: "introducir su distancia"
+                            },
+                            on: {
+                              blur: _vm.validarDistancia,
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.distancia = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [_c("option", [_vm._v(_vm._s(_vm.distanciaOpcion))])]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm.grado == "Inicial"
+                        ? _c("div", [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "label",
+                                attrs: { for: "tallaZapato" }
+                              },
+                              [
+                                _vm._v("Talla de Zapatos:"),
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "red--text",
+                                    attrs: { if: "errorTallaZapato" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.requerimientosTallaZapato)
+                                    )
+                                  ]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.zapato,
+                                  expression: "zapato"
+                                }
+                              ],
+                              class: { " border-danger": _vm.errorTallaZapato },
+                              attrs: {
+                                type: "number",
+                                name: "tallaZapato",
+                                id: "tallaZapato"
+                              },
+                              domProps: { value: _vm.zapato },
+                              on: {
+                                blur: _vm.validarTallaZapato,
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.zapato = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "label",
+                                attrs: { for: "tallaPantalon" }
+                              },
+                              [
+                                _vm._v("Talla de Pantalón:"),
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "red--text",
+                                    attrs: { if: "errorTallaPantalon" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.requerimientosTallaPantalon)
+                                    )
+                                  ]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.pantalon,
+                                  expression: "pantalon"
+                                }
+                              ],
+                              class: {
+                                " border-danger": _vm.errorTallaPantalon
+                              },
+                              attrs: {
+                                type: "number",
+                                name: "tallaPantalon",
+                                id: "tallaPantalon"
+                              },
+                              domProps: { value: _vm.pantalon },
+                              on: {
+                                blur: _vm.validarTallaPantalon,
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.pantalon = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "label",
+                                attrs: { for: "tallaCamisa" }
+                              },
+                              [
+                                _vm._v("Talla de Camisa:"),
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "red--text",
+                                    attrs: { if: "errorTallaCamisa" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.requerimientosTallaCamisa)
+                                    )
+                                  ]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.camisa,
+                                  expression: "camisa"
+                                }
+                              ],
+                              class: { " border-danger": _vm.errorTallaCamisa },
+                              attrs: {
+                                type: "number",
+                                name: "tallaCamisa",
+                                id: "tallaCamisa"
+                              },
+                              domProps: { value: _vm.camisa },
+                              on: {
+                                blur: _vm.validarTallaCamisa,
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.camisa = $event.target.value
+                                }
+                              }
+                            })
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "checkbox" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.representante,
+                              expression: "representante"
+                            }
+                          ],
+                          class: { " border-danger": _vm.errorRepresentante },
+                          attrs: {
+                            type: "checkbox",
+                            name: "autorizacion",
+                            id: "autorizacion"
+                          },
+                          domProps: {
+                            checked: Array.isArray(_vm.representante)
+                              ? _vm._i(_vm.representante, null) > -1
+                              : _vm.representante
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.representante,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    (_vm.representante = $$a.concat([$$v]))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.representante = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
+                              } else {
+                                _vm.representante = $$c
+                              }
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "label" }, [
+                          _vm._v(
+                            "Confirmo que estoy bajo la autorización de mis padres"
+                          ),
+                          _vm.errorRepresentante
+                            ? _c("span", { staticClass: "red--text" }, [
+                                _c("br"),
+                                _vm._v(_vm._s(_vm.requerimientosRepresentante))
+                              ])
+                            : _vm._e()
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          attrs: {
+                            type: "submit",
+                            name: "registrar",
+                            id: "mensaje_btn",
+                            value: "registrar"
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.permisoRegistro = true
+                            }
+                          }
+                        },
+                        [_vm._v("Registrar")]
+                      )
+                    ])
+                  ]
+                )
+              : _vm._e()
           ])
         : _vm._e()
     ],

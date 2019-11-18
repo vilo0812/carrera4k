@@ -19,45 +19,45 @@
       </div>
     </transition>
     <transition name="fade" v-if="formulario">
-    	<form action="" name="formulario_envio" class="mensaje_form" method="post" @submit.prevent="registro">
-   <h2>Registro de Carrera 4k</h2>
+      <form action="" name="formulario_envio" class="mensaje_form" method="post" @submit.prevent="validar" id="formulario_envio" v-if="formulario">
+   <h2>Registro de Carrera Atlética</h2>
    <div>
        <div class="input_group">
-            <label for="nombre" id="labelNombre" class="label">Nombre: <span v-if="nombreError != null" class="error">{{nombreError}}</span></label>
-           <input type="text" name="nombre" id="nombre" placeholder="Introducir Nombre" :class="{' border-danger' : nombreError != null}"  v-model="nombre" minlength="3" maxlength="50" required>
+            <label for="nombre" id="labelNombre" class="label">Nombre: <span v-if="errorNombre" class="red--text">{{requerimientosNombre}}</span></label>
+           <input type="text" name="nombre" id="nombre" placeholder="Introducir Nombre" :class="{' border-danger' : errorNombre}" v-model="nombre" @blur="validarNombre">
        </div>
-        <div class="input_group">
-           <label for="apellido" id="labelApellido" class="label">Apellido:<span v-if="apellidoError != null" class="error">{{apellidoError}}</span> </label>
-            <input type="text" name="apellido" id="apellido" placeholder="Introducir Apellido" class="input_form" :class="{' border-danger' : apellidoError != null}" v-model="apellido" minlength="3" maxlength="50" required>
+       <div class="input_group">
+           <label for="apellido" id="labelApellido" class="label">Apellido:<span v-if="errorApellido" class="red--text">{{requerimientosApellido}}</span> </label>
+            <input type="text" name="apellido" id="apellido" placeholder="Introducir Apellido" class="input_form" :class="{' border-danger' : errorApellido}" v-model="apellido" @blur="validarApellido">
          </div>
-       <div class="input_group">
-         <label for="cedula" id="labelCedula" class="label">Cédula ó Cédula estudiantil: <span v-if="cedulaError != null" class="error">{{cedulaError}}</span></label>
-         <input type="text" name="cedula" id="cedula" placeholder="Introducir Cédula" :class="{' border-danger' : cedulaError != null}" v-model="cedula" minlength="6" maxlength="15" pattern="^([VEJPG]{1})([0-9]{7,9})$"required>
-       </div>
-       <div class="input_group">
-                     <label for="plantel" id="labelPlantel"class="label">Plantel: </label>
-                        <select name="plantel" id="plantel" placeholder="Introducir Plantel" :class="{' border-danger' : plantelError != null}" v-model="plantel" minlength="3 " maxlength="100" required>
-                            <option v-for="item of plantelOpciones">{{item}}</option>
-                        </select>
-                   </div>
-       <div class="input_group">
-         <label for="edad" id="labelEdad"class="label">Edad:<span v-if="edadError != null" class="error">{{edadError}}</span> </label>
-         <input type="number" name="edad" id="edad" placeholder="Introducir Edad" :class="{' border-danger' : edadError != null}" v-model="edad" minlength="1" maxlength="2" required>
-       </div>
-       <div class="input_group">
-         <span v-if="sexoError != null" class="error">{{sexoError}}</span>
-         <p>Masculino</p>
-         <input type="radio" name="sexo" id="sexo" class="input_form" value="masculino" v-model="sexo">
-         <p>Femenino</p>
-         <input type="radio" name="sexo" id="sexo" class="input_form"value="femenino" v-model="sexo" required>
-       </div>
-       <div class="input_group">
-           <label for="direccion" id="direccion"class="label">Dirección: <span v-if="direccionError != null" class="error">{{direccionError}}</span></label>
-           <textarea for="" name="direccion" placeholder="Introducir Dirección" :class="{' border-danger' : direccionError != null}"  v-model="direccion" minlength="3" maxlength="150" required></textarea>
+         <div class="input_group">
+           <label for="cedula" id="labelCedula" class="label">Cédula ó Cédula estudiantil: <span v-if="errorCedula" class="red--text">{{requerimientosCedula}}</span></label>
+           <input type="text" name="cedula" id="cedula" placeholder="Introducir Cédula" :class="{' border-danger' : errorCedula}" v-model="cedula" @blur="validarCedula">
         </div>
         <div class="input_group">
-              <label for="grado" id="grado"class="label">Grado: <span v-if="gradoError != null" class="error">{{gradoError}}</span></label>
-              <select name="grado" v-model="grado" placeholder="introducir su grado" :class="{' border-danger' : gradoError != null}" required>
+         <label for="plantel" id="labelPlantel"class="label">Plantel: <span v-if="errorPlantel" class="red--text">{{requerimientosPlantel}}</span></label>
+            <select name="plantel" id="plantel" placeholder="Introducir Plantel" :class="{' border-danger' : errorPlantel}" v-model="plantel" @blur="validarPlantel">
+              <option v-for="item of plantelOpciones">{{item}}</option> 
+            </select>
+        </div>
+        <div class="input_group">
+         <label for="edad" id="labelEdad"class="label">Edad:<span v-if="errorEdad" class="red--text">{{requerimientosEdad}}</span> </label>
+         <input type="number" name="edad" id="edad" placeholder="Introducir Edad" :class="{' border-danger' : errorEdad}" v-model="edad" @blur="validarEdad">
+       </div>
+       <div class="input_group">
+         <span v-if="errorSexo" class="red--text">{{requerimientosSexo}}</span>
+         <p>Masculino</p>
+         <input type="radio" name="sexo" id="sexo" class="input_form" value="masculino" :class="{' border-danger' : errorSexo}" v-model="sexo">
+         <p>Femenino</p>
+         <input type="radio" name="sexo" id="sexo" class="input_form"value="femenino" :class="{' border-danger' : errorSexo}" v-model="sexo">
+       </div>
+       <div class="input_group">
+           <label for="direccion" id="direccion"class="label">Dirección: <span v-if="errorDireccion" class="red--text">{{requerimientosDireccion}}</span></label>
+           <textarea for="" name="direccion" placeholder="Introducir Dirección" :class="{' border-danger' : errorDireccion}"  v-model="direccion" @blur="validarDireccion"></textarea>
+        </div>
+        <div class="input_group">
+              <label for="grado" id="grado"class="label">Grado: <span v-if="errorGrado" class="red--text">{{requerimientosGrado}}</span></label>
+              <select name="grado" v-model="grado" placeholder="introducir su grado" :class="{' border-danger' : errorGrado}" @blur="validarGrado">
                 <option>Inicial</option>
                 <option>4to GRADO</option>
                 <option>5to GRADO</option>
@@ -71,25 +71,24 @@
               </select>
         </div>
         <div class="input_group">
-              <label  for="distancia"  class="label">Distancia:<span v-if="distanciaError != null" class="error">{{distanciaError}}</span></label>
-             <select name="distancia" placeholder="introducir su distancia" :class="{' border-danger' : distanciaError != null}" v-model="distancia" required>
+              <label  for="distancia"  class="label">Distancia:<span v-if="errorDistancia" class="red--text">{{requerimientosDistancia}}</span></label>
+             <select name="distancia" placeholder="introducir su distancia" :class="{' border-danger' : errorDistancia}" v-model="distancia" @blur="validarDistancia">
                 <option>{{distanciaOpcion}}</option>
               </select>
-                <!--<option>{{validacionDistancia}}</option>-->
         </div>
         <div v-if="grado == 'Inicial'">
-              <label  for="tallaZapato"  class="label">Talla de Zapatos:</label>
-              <input type="number" name="tallaZapato" id="tallaZapato" class="input_form" v-model="zapato" maxlength="20" pattern="[0-40]{8}" required>
-              <label  for="tallaPantalon"  class="label">Talla de Pantalón:</label>
-              <input type="number" name="tallaPantalon" id="tallaPantalon" class="input_form" v-model="pantalon" maxlength="20" pattern="[0-40]{8}" required>
-              <label  for="tallaCamisa"  class="label">Talla de Camisa:</label>
-              <input type="number" name="tallaCamisa" id="tallaCamisa" class="input_form" v-model="camisa" maxlength="20" pattern="[0-40]{8}" require>
+              <label  for="tallaZapato" class="label">Talla de Zapatos:<span if="errorTallaZapato" class="red--text">{{requerimientosTallaZapato}}</span></label>
+              <input type="number" name="tallaZapato" id="tallaZapato" :class="{' border-danger' : errorTallaZapato}" v-model="zapato" @blur="validarTallaZapato">
+              <label  for="tallaPantalon"  class="label">Talla de Pantalón:<span if="errorTallaPantalon" class="red--text">{{requerimientosTallaPantalon}}</span></label>
+              <input type="number" name="tallaPantalon" id="tallaPantalon" :class="{' border-danger' : errorTallaPantalon}" v-model="pantalon" @blur="validarTallaPantalon">
+              <label  for="tallaCamisa"  class="label">Talla de Camisa:<span if="errorTallaCamisa" class="red--text">{{requerimientosTallaCamisa}}</span></label>
+              <input type="number" name="tallaCamisa" id="tallaCamisa" :class="{' border-danger' : errorTallaCamisa}" v-model="camisa" @blur="validarTallaCamisa">
           </div>
           <div class="checkbox">
-              <input type="checkbox" name="autorizacion" id="autorizacion" class="input_form" v-model="verificacionPaternal" required>
-              <label  for="tallaZapato"  class="label">Confirmo que estoy bajo la autorización de mis padres</label>
+              <input type="checkbox" name="autorizacion" id="autorizacion" :class="{' border-danger' : errorRepresentante}" v-model="representante">
+              <label  class="label">Confirmo que estoy bajo la autorización de mis padres<span v-if="errorRepresentante" class="red--text"><br>{{requerimientosRepresentante}}</span></label>
           </div>
-       <button id="mensaje_btn" type="submit" value="registrar">Registrar</button>
+       <button type="submit" name="registrar" id="mensaje_btn" value="registrar" @click="permisoRegistro=true">Registrar</button>
      </div>
   </form>
   </transition>
@@ -105,7 +104,7 @@ export default {
     return {
     nombre:'',
     apellido:'',
-    cedula:'V',
+    cedula:'',
     plantel:'',
     plantelOpciones:'',
     edad:'',
@@ -117,8 +116,7 @@ export default {
     pantalon:'',
     camisa:'',
     recomendacion:true,
-    formulario:false,
-    verificacionPaternal:'',
+    representante:'',
 	opciones: [
       'Mini Carrera Atlética',
       'Vuelta a la Manzana',
@@ -126,35 +124,120 @@ export default {
       ],
      distancia_id:'',
      grado_id:'',
-     errorNombreActivar:'',
-      errorApellidoActivar:'',
-      errorCedulaActivar:'',
-      errorPlantelActivar:'',
-      errorEdadActivar:'',
-      errorSexoActivar:'',
-      errorDireccionActivar:'',
-      errorGradoActivar:'',
-      errorDireccionActivar:'',
-      errorGradoActivar:'',
-      errorDistanciaActivar:''
+     formulario:false,
+      errorNombre:null,
+      errorApellido:null,
+      errorCedula:null,
+      errorLetras:null,
+      errorPlantel:null,
+      errorEdad:null,
+      errorSexo:null,
+      errorDireccion:null,
+      errorGrado:null,
+      errorDistancia:null,
+      errorTallaZapato:null,
+      errorTallaPantalon:null,
+      errorTallaCamisa:null,
+      errorRepresentante:null,
+      permisoRegistro:true
     }
   },
   methods: {
+        validar(){
+            if(this.nombre.trim() == ''){
+            this.validarNombre();
+            this.permisoRegistro=false;
+            }if(this.nombre.length < 3){
+            this.validarNombre();
+            this.permisoRegistro=false;
+            }if(this.nombre.length > 50){
+            this.validarNombre();
+            this.permisoRegistro=false;
+            }if(this.apellido.trim() == ''){
+            this.validarApellido();
+            this.permisoRegistro=false;
+            }if(this.apellido.length < 3){
+            this.validarApellido();
+            this.permisoRegistro=false;
+            }if(this.apellido.length > 50){
+            this.validarApellido();
+            this.permisoRegistro=false;
+            }if(this.cedula.trim() == ''){
+            this.validarCedula();
+            this.permisoRegistro=false;
+            }if(this.cedula.length  > 18){
+            this.validarCedula();
+            this.permisoRegistro=false;
+            }if(this.cedula.length  < 7){
+            this.validarCedula();
+            this.permisoRegistro=false;
+            }if(this.plantel.trim() == ''){
+            this.validarPlantel();
+            this.permisoRegistro=false;
+            }if(this.edad <= 4){
+            this.validarEdad();
+            this.permisoRegistro=false;
+            }if(this.edad > 22){
+            this.validarEdad();
+            this.permisoRegistro=false;
+            }if(this.sexo.trim() == ''){
+            this.validarSexo();
+            this.permisoRegistro=false;
+            }if(this.direccion.length < 3){
+            this.validarDireccion();
+            this.permisoRegistro=false;
+            }if(this.direccion.length > 150){
+            this.validarDireccion();
+            this.permisoRegistro=false;
+            }if(this.grado.trim() == ''){
+            this.validarGrado();
+            this.permisoRegistro=false;
+            }if(this.distancia.trim() == ''){
+            this.validarDistancia();
+            this.permisoRegistro=false;
+            }if(this.zapato < 20 && this.grado.trim() == 'Inicial'){
+            this.validarTallaZapato();
+            this.permisoRegistro=false;
+            }if(this.zapato > 46 && this.grado.trim() == 'Inicial'){
+            this.validarTallaZapato();
+            this.permisoRegistro=false;
+            }if(this.pantalon < 3 && this.grado.trim() == 'Inicial'){
+            this.validarTallaPantalon();
+            this.permisoRegistro=false;
+            }if(this.pantalon > 40 && this.grado.trim() == 'Inicial'){
+            this.validarTallaPantalon();
+            this.permisoRegistro=false;
+            }if(this.camisa < 3 && this.grado.trim() == 'Inicial'){
+            this.validarTallaCamisa();
+            this.permisoRegistro=false;
+            }if(this.camisa > 40 && this.grado.trim() == 'Inicial'){
+            this.validarTallaCamisa();
+            this.permisoRegistro=false;
+            }if(!this.representante){
+            this.validarRepresentante();
+            this.permisoRegistro=false;
+            }if(this.cedula.split('')){
+              var letrasCedula = this.cedula.split('');
+              var numero = " / - V 0 1 2 3 4 5 6 7 8 9";
+              var i;
+              for(i in letrasCedula){
+                 if (numero.indexOf(letrasCedula[i]) == -1){
+                  this.errorLetras=true;
+                  this.errorCedula=true;
+                  this.permisoRegistro=false;
+                 }else{
+                  this.errorLetras=null;
+                  this.errorCedula=null;
+                 }
+              }
+          }
+          if(this.permisoRegistro){
+          this.registro();
+          }else{
+          alert('error al registrar');
+          }
+      },
         registro() {
-          if(this.nombre.trim() === ''
-          	|| this.apellido.trim() === ''
-          	|| this.cedula.trim() === ''
-          	|| this.plantel.trim() === ''
-          	|| this.plantel.trim() === ''
-          	|| this.edad.trim() === ''
-          	|| this.sexo.trim() === ''
-          	|| this.direccion.trim() === ''
-          	|| this.grado.trim() === ''
-          	|| this.distancia.trim() === ''
-          	){
-              alert('Debes completar todos los campos antes de registrarte');
-              return;
-	      }
 	    switch (this.distancia) {
 		  case 'Mini Carrera Atlética':
 		    this.distancia_id = 1;
@@ -215,7 +298,7 @@ export default {
 	        plantel:this.plantel,
 	        distancia_id:this.distancia_id,//no tengo el valor direccion_id upppsss
 	        zapato:this.zapato,
-	        pantalon:this.zapato,
+	        pantalon:this.pantalon,
 	        camisa:this.camisa
 	      }
 	      // console.log(params);
@@ -225,8 +308,143 @@ export default {
 	         alert('registrado con exito');
 	       })
 
+        },
+    validarNombre(){
+          var val = this.nombre.trim();
+          if(val == ''){
+          this.errorNombre=true;
+          }else if(val.length  < 3){
+            this.errorNombre=true;
+          }else if(val.length  > 50){
+            this.errorNombre=true;
+          }else{
+            this.errorNombre=false;
+          }
+        },//errorApellido
+        validarApellido(){
+          var val = this.apellido.trim();
+          if(val == ''){
+          this.errorApellido=true;
+          }else if(val.length  < 3){
+            this.errorApellido=true;
+          }else if(val.length  > 50){
+            this.errorApellido=true;
+          }else{
+            this.errorApellido=false;
+          }
+        },
+        validarCedula(){
+          var val = this.cedula.trim();
+          this.errorLetras=null;
+          this.errorCedula=null;
+          if(val == ''){
+          this.errorCedula=true;
+          }else if(val.length  < 7){
+          this.errorCedula=true;
+          }else if(val.length  > 18){
+          this.errorCedula=true;
+          }else if(this.cedula.split('')){
+            var letrasCedula = this.cedula.split('');
+            var numero = "/ - V 0 1 2 3 4 5 6 7 8 9";
+            var i;
+            for(i in letrasCedula){
+               if (numero.indexOf(letrasCedula[i]) == -1){
+                this.errorLetras=true;
+                this.errorCedula=true;
+                return;
+               }else{
+                this.errorLetras=null;
+                this.errorCedula=null;
+               }
+            }
+          } else{
+            this.errorCedula=false;
+          }
+        },
+        validarPlantel(){
+          var val = this.plantel.trim();
+          if(val == ''){
+          this.errorPlantel=true;
+          }else{
+            this.errorPlantel=false;
+          }
+        },
+        validarEdad(){//return 'no puedes ser menor a tres años'
+          if(this.edad <= 4){
+          this.errorEdad=true
+          }else if(this.edad > 22){
+            this.errorEdad=true
+          }else{
+            this.errorEdad=false
+          }
+        },
+        validarSexo(){
+          if(this.sexo.trim() == ''){
+          this.errorSexo=true
+          }else{
+          this.errorSexo=false
+          }
+        },
+        validarDireccion(){
+          if(this.direccion.length < 3){
+          this.errorDireccion=true
+          }else if(this.direccion.length > 50){
+          this.errorDireccion=true
+          }else{
+          this.errorDireccion=false
+          }
+        },
+        validarGrado(){
+          var val = this.grado.trim();
+          if(val == ''){
+          this.errorGrado=true;
+          }else{
+            this.errorGrado=false;
+          }
+        },
+        validarDistancia(){
+          var val = this.distancia.trim();
+          if(val == ''){
+          this.errorDistancia=true;
+          }else{
+            this.errorDistancia =false;
+          }
+        },
+        validarTallaZapato(){
+          if(this.zapato < 20){
+          this.errorTallaZapato=true
+          }else if(this.zapato > 46){
+            this.errorTallaZapato=true
+          }else{
+            this.errorTallaZapato=false
+          }
+        },
+        validarTallaPantalon(){
+          if(this.pantalon < 3){
+          this.errorTallaPantalon=true
+          }else if(this.pantalon > 40){
+            this.errorTallaPantalon=true
+          }else{
+            this.errorTallaPantalon=false
+          }
+        },
+        validarTallaCamisa(){
+          if(this.camisa < 3){
+          this.errorTallaCamisa=true
+          }else if(this.camisa > 40){
+            this.errorTallaCamisa=true
+          }else{
+            this.errorTallaCamisa=false
+          }
+        },
+        validarRepresentante(){
+          if(!this.representante){
+          this.errorRepresentante=true;
+          }else{
+          this.errorRepresentante=false;
+          }
         }
-      },
+    },
   computed: {
         distanciaOpcion() {
             if(this.grado == 'Inicial'){
@@ -241,115 +459,139 @@ export default {
               return sugerencia;
             }
         },
-    nombreError(){
+        requerimientosNombre(){
           var val = this.nombre.trim();
           if(val == ''){
-            return null
+          return "por favor introduzca su nombre";
+          }else if(val.length  < 3){
+          return "por favor introduzca un nombre de al menos tres letras";
+          }else if(val.length  > 50){
+          return "por favor introduzca un nombre menor a cincuenta letras";
+          }else{
+            return null;
           }
-          if(val.length  < 3){
-            return 'por favor introduce un nombre más largo'
-          }
-          if(val.length  > 50){
-            return 'has excedido la cantidad de caracteres'
-          }
-          return null;
         },
-        apellidoError(){
+        requerimientosApellido(){
           var val = this.apellido.trim();
           if(val == ''){
-            return null
-          }
-          if(val.length  < 3){
-            return 'por favor introduce un apellido más largo'
-          }
-          if(val.length  > 50){
-            return 'has excedido la cantidad de caracteres'
-          }
+          return "por favor introduzca su apellido";
+          }else if(val.length  < 3){
+          return "por favor introduzca un apellido de al menos tres letras";
+          }else if(val.length  > 150){
+          return "por favor introduzca un apellido menor a cincuenta letras";
+          }else{
             return null;
+          }
         },
-        cedulaError(){
+        requerimientosCedula(){
           var val = this.cedula.trim();
           if(val == ''){
-            return null
-          }
-          if(val == 1){
-            return null
-          }
-          if(val.length  < 6 && this.cedula == null){
-            return 'por favor introduce una cédula más larga'
-          }
-          if(val.length  > 15){
-            return 'has excedido la cantidad de caracteres'
+          return "por favor introduzca su cedula";
+          }else if(val.length  > 18){
+          return "por favor introduzca una cedula más corta cedula";
+          }else if(this.errorLetras){
+          return "por favor introduzca el formato correcto";
+          }else if(val.length  < 7){
+          return "su cedula es muy corta";
+          }else{
+            return null;
           }
         },
-        plantelError(){
+        requerimientosPlantel(){
           var val = this.plantel.trim();
           if(val == ''){
-            return null
-          }
-          if(val.length  < 3){
-            return 'por favor introduzca un plantel más largo'
-          }
-          if(val.length  > 100){
-            return 'has excedido la cantidad de caracteres'
+          return "por favor elija su plantel";
+          }else{
+            return null;
           }
         },
-        edadError(){
-          if(this.edad < 3 && this.edad == null){
-          return 'no puedes ser menor a tres años'
-          }
-          if(this.edad < 2 && this.edad == null){
-          return 'no puedes ser menor a dos años'
-          }
-          if(this.edad < 1 && this.edad == null){
-          return 'no puedes ser menor a un años'
-          }
-          if(this.edad < 0 && this.edad == null){
-          return 'no puedes no haber nacido'
-          }
-          if(this.edad > 21){
-          return 'no puedes ser mayor a veinte años'
-          }
-          var val = this.edad.trim();
-          if(val == ''){
-            return null
+        requerimientosEdad(){
+          if(this.edad == 0){
+            return 'por favor introdusca su edad';
+          }else if(this.edad <= 4){
+            return 'no puedes ser menor a cuatro años';
+          }else if(this.edad >22){
+            return 'no puedes ser mayor de Veintidós años';
+          }else{
+            return null;
           }
         },
-        sexoError(){
+        requerimientosSexo(){
           var val = this.sexo.trim();
           if(val == ''){
-            return null
+          return "por favor seleccione su tipo de sexo";
+          }else{
+            return null;
           }
         },
-        direccionError(){
-          var val = this.direccion.trim();
-          if(val == ''){
-            return null
-          }
-          if(val.length  < 3){
-            return 'por favor introdusca una dirección más larga'
-          }
-          if(val.length  > 150){
-            return 'has excedido la cantidad de caracteres'
+        requerimientosDireccion(){
+          if(this.direccion.length == 0){
+            return 'por favor introdusca su dirección';
+          }else if(this.direccion.length < 3){
+            return 'por favor introdusca una dirección más larga';
+          }else if(this.direccion.length > 150){
+            return 'por favor introdusca una dirección más corta';
+          }else{
+            return null;
           }
         },
-        gradoError(){
+        requerimientosGrado(){
           var val = this.grado.trim();
           if(val == ''){
-            return null
+          return "por favor elija su grado";
+          }else{
+            return null;
           }
         },
-        distanciaError(){
+        requerimientosTallaZapato(){
+          if(this.zapato == 0){
+            return 'por favor introdusca su talla de zapato';
+          }else if(this.zapato <20){
+            return 'su talla no puede ser menor a veinte';
+          }else if(this.zapato >46){
+            return 'su talla no puede ser mayor a cuarentiseis';
+          }else{
+            return null;
+          }
+        },
+        requerimientosTallaPantalon(){
+          if(this.pantalon == 0){
+            return 'por favor introdusca su talla de pantalon';
+          }else if(this.pantalon <3){
+            return 'su talla no puede ser menor a tres';
+          }else if(this.pantalon >40){
+            return 'su talla no puede ser mayor a cuarenta';
+          }else{
+            return null;
+          }
+        },
+        requerimientosTallaCamisa(){
+          if(this.pantalon == 0){
+            return 'por favor introdusca su talla de camisa';
+          }else if(this.pantalon < 3){
+            return 'su talla no puede ser menor a tres';
+          }else if(this.pantalon >40){
+            return 'su talla no puede ser mayor a cuarenta';
+          }else{
+            return null;
+          }
+        },
+        requerimientosRepresentante(){
+          if(!this.representante){
+          return 'campo obligatorio';
+          }else{
+          return null;
+          }
+        },
+        requerimientosDistancia(){
           var val = this.distancia.trim();
           if(val == ''){
-          return null
+          return "por favor elija su distancia a recorrer";
+          }else{
+            return null;
           }
         },
-        representanteError(){
-          if(this.representante === false){
-            return'debe estar bajo la supervisión de su representante';
-        }
-        },
+      },
     created(){
       let url = `http://127.0.0.1:8000/api/planteles`
          axios.get(url)
@@ -358,7 +600,6 @@ export default {
          })
     }
   }
-}
 </script>
 
 <style lang="css" scoped>
@@ -366,11 +607,7 @@ export default {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-}
-.error{
-  color:red;
-}
-.border-danger{
+}.border-danger{
   border-color:red;
 }
 .fade-enter-active, .fade-leave-active {
