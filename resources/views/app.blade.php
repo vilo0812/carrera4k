@@ -6,7 +6,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Laravel</title>
-
+    <link rel="icon" type="image/png" href="logos/favicon-32x32.png" sizes="32x32">
+    <script src="https://kit.fontawesome.com/ddbc1ecfce.js" crossorigin="anonymous"></script>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 

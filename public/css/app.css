@@ -1,6 +1,16 @@
 
 *[data-v-63cd6604], *[data-v-63cd6604]:before, *[data-v-63cd6604]:after {
   box-sizing: border-box;
+}
+.body[data-v-63cd6604] {
+        background: url(/images/zapatosng.png?fabb870d552e95981c353957e72b6ecb)no-repeat,
+                    url(/images/pan.jpg?78488a7b19b1cbfbe4a4da2e57aa0e71) repeat;
+        font-family: 'Nunito', sans-serif;
+        color: #384047;
+        width: 100%;
+        background-size: contain;
+        margin: 0;
+        height: 1000;
 }.border-danger[data-v-63cd6604]{
   border-color:red;
 }
@@ -114,12 +124,61 @@ img[data-v-63cd6604] {
 .logo-img[data-v-63cd6604] {
     margin-right: 15px;
 }
+/*footer*/
+.pie[data-v-63cd6604] {
+  background-color: #FF4A00;
+  margin: 20px 0 0 0;
+  color: #fff;
+}
+.icono-m[data-v-63cd6604] {
+    font-size: 30px;
+    margin-right: 16px;
+}
+.icono-m[data-v-63cd6604]:last-of-type {
+    margin: 0;
+}
+.mr[data-v-63cd6604] {
+    margin-right: 12px;
+}
+.parrafo-center[data-v-63cd6604] {
+    text-align: center;
+    margin: 0;
+    margin-top: 20px;
+    padding: 16px;
+    background-color: rgba(0,0,0,.2);
+}
+.parrafo-s[data-v-63cd6604] {
+    font-size: 13px;
+    text-transform: capitalize;
+}
+.contenedor[data-v-63cd6604] {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+}
+.img-fo[data-v-63cd6604] {
+  height: 75px;
+}
+.fundabit[data-v-63cd6604] {
+    font-size: 16px;
+}
 @media screen and (min-width: 480px) {
 form[data-v-63cd6604] {
     max-width: 480px;
 }
 }
 
+.body {
+      margin: 0;
+        background: url(/images/manzana.png?80e23d55e68c9ec98f3fda1aca669eb8)center center/ contain no-repeat,
+                    url(/images/pan.jpg?78488a7b19b1cbfbe4a4da2e57aa0e71) center center/ cover no-repeat;
+                    height: 1200;
+}
 * {
     box-sizing: border-box;
 }
@@ -201,11 +260,12 @@ label.light {
     display: -webkit-box;
     display: flex;
     flex-wrap: wrap-reverse;
-    justify-content: space-around;
+    -webkit-box-pack: justify;
+            justify-content: space-between;
+    padding: 100px;
 }
 .hijo {
       max-width: 300px;
-      /*margin: 10px auto;*/
       padding: 10px 20px;
       background: #f4f7f8;
       border-radius: 8px;
@@ -236,6 +296,52 @@ label.light {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
             flex-direction: column;
+}
+/*footer*/
+footer{
+  margin-top: 200px;
+}
+.pie {
+  background-color: #FF4A00;
+  margin: 50px 0 0 0;
+  color: #fff;
+}
+.icono-m {
+    font-size: 30px;
+    margin-right: 16px;
+}
+.icono-m:last-of-type {
+    margin: 0;
+}
+.mr {
+    margin-right: 12px;
+}
+.parrafo-center {
+    text-align: center;
+    margin: 0;
+    margin-top: 20px;
+    padding: 16px;
+    background-color: rgba(0,0,0,.2);
+}
+.parrafo-s {
+    font-size: 13px;
+    text-transform: capitalize;
+}
+.contenedor {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+}
+.img-fo {
+  height: 75px;
+}
+.fundabit {
+    font-size: 16px;
 }
 
 /** Ripples */

@@ -1,5 +1,5 @@
 <template>
-    <div class="fondo">
+    <div class="body">
     	<header>
     		<div class="item">
 		        <img src="../.././logos/mppe.png" alt="logo ministerio" class="logo-img item-2">
@@ -12,9 +12,16 @@
     		</div>
     	</header>
       <transition name="fade">
+      <div v-if="registroExitoso" class="verificar">
+        <h3>Registrado exitosamente</h3>
+        <img src="../.././logos/trofeo.jpg" width="100%">
+        <button  @click="formulario = false; recomendacion = true;">OK</button>
+      </div>
+    </transition>
+      <transition name="fade">
       <div v-if="recomendacion" class="verificar">
         <h3>Recomendamos la supervisión de tus padres antes de llenar el formulario.</h3>
-        <img src="../.././logos/Corriendo00.png" width="100%">
+        <img src="../.././logos/jovenes-corriendo.jpg" width="100%">
         <button  @click="formulario = true; recomendacion = false;">OK</button>
       </div>
     </transition>
@@ -36,8 +43,10 @@
         </div>
         <div class="input_group">
          <label for="plantel" id="labelPlantel"class="label">Plantel: <span v-if="errorPlantel" class="red--text">{{requerimientosPlantel}}</span></label>
+
             <select name="plantel" id="plantel" placeholder="Introducir Plantel" :class="{' border-danger' : errorPlantel}" v-model="plantel" @blur="validarPlantel">
-              <option v-for="item of plantelOpciones">{{item}}</option> 
+
+              <option v-for="item of plantelOpciones">{{item}}</option>
             </select>
         </div>
         <div class="input_group">
@@ -92,9 +101,38 @@
      </div>
   </form>
   </transition>
+    <footer class="pie">
+      <div class="contenedor">
+        <div class="redes">
+            <p class="parrafo-s">Siguenos En Nuestras Redes Sociales</p>
+            <div class="iconos">
+              <a href="http://www.twitter.com/fundabitguaric2" target="_blank" class="mr">
+                <i class="fab fa-twitter-square icono-m"></i>
+              </a>
+
+              <a href="http://www.facebook.com/fundabit.guarico.75" target="_blank" class="mr">
+                <i class="fab fa-facebook-square icono-m"></i>
+              </a>
+
+              <a href="http://www.instagram.com/fundabitguarico" target="_blank">
+                <i class="fab fa-instagram icono-m"></i>
+              </a>
+
+
+
+            </div>
+        </div>
+
+        <div style="somosfb">
+            <a href="https://twitter.com/hashtag/somosfundabit" target="_blank">
+          <img src="images/somos-fundabit-blanco.png" alt="Fundabit" class="img-fo">
+            </a>
+        </div>
+      </div>
+       <p class="parrafo-center">Desarrollado Por Gabriel Viloria <br> Fundabit 2019</p>
+    </footer>
     </div>
 </template>
-
 <script>
 export default {
 
@@ -139,7 +177,8 @@ export default {
       errorTallaPantalon:null,
       errorTallaCamisa:null,
       errorRepresentante:null,
-      permisoRegistro:true
+      permisoRegistro:true,
+      registroExitoso:false
     }
   },
   methods: {
@@ -305,7 +344,8 @@ export default {
 	      let url = `http://127.0.0.1:8000/api/registrar`
 	       axios.post(url,params)
 	       .then(res => {
-	         alert('registrado con exito');
+	         this.registroExitoso=true;
+           this.formulario=false;
 	       })
 
         },
@@ -607,6 +647,16 @@ export default {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+.body {
+        background: url("../.././logos/zapatosng.png")no-repeat,
+                    url("../.././logos/pan.jpg") repeat;
+        font-family: 'Nunito', sans-serif;
+        color: #384047;
+        width: 100%;
+        background-size: contain;
+        margin: 0;
+        height: 1000;
 }.border-danger{
   border-color:red;
 }
@@ -716,7 +766,49 @@ img {
 .logo-img {
     margin-right: 15px;
 }
+/*footer*/
+.pie {
+  background-color: #FF4A00;
+  margin: 20px 0 0 0;
+  color: #fff;
+}
+.icono-m {
+    font-size: 30px;
+    margin-right: 16px;
+}
 
+.icono-m:last-of-type {
+    margin: 0;
+}
+.mr {
+    margin-right: 12px;
+}
+
+.parrafo-center {
+    text-align: center;
+    margin: 0;
+    margin-top: 20px;
+    padding: 16px;
+    background-color: rgba(0,0,0,.2);
+}
+.parrafo-s {
+    font-size: 13px;
+    text-transform: capitalize;
+}
+.contenedor {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.img-fo {
+  height: 75px;
+}
+.fundabit {
+    font-size: 16px;
+}
 @media screen and (min-width: 480px) {
 
   form {

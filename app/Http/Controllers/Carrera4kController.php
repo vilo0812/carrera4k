@@ -23,9 +23,19 @@ class Carrera4kController extends Controller
     public function index() {
 	  return view('app');
 	  }
+
+
+
+
+
     public function planteles(){
         return Planteles::pluck('plantel');
     }
+
+
+
+
+
 	public function registrar(Request $registrosCompleto){
         /////////////////////////////
         //registro que asigna un numero de competicion al participante y lo registra

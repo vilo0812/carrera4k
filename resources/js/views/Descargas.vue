@@ -1,6 +1,6 @@
 <template>
-  <div class="fondo">
-    <div class="padre-f body">
+  <div class="body">
+    <div class="padre-f">
         <div class="hijo fila">
             <a class="btnDescarga" href="/descargar">Descargar Todos Los Participantes</a>
             <a class="btnDescarga" href="/descargarMCA">Mini Carrera Atlética</a>
@@ -11,7 +11,7 @@
             <form action="/descargaP" name="formulario_envio" class="mensaje_form" method="get">
                <h2>Descarga Personalizada</h2>
                <div>
-            
+
                    <div class="input_group">
                      <label for="plantel" id="labelPlantel"class="label">Plantel: </label>
                         <select name="plantel" id="plantel" placeholder="Introducir Plantel" :class="{' border-danger' : plantelError != null}" v-model="plantel" minlength="3 " maxlength="100" required>
@@ -26,11 +26,41 @@
                             <option>Copa Bruno Carrasquel 4k</option>
                           </select>
                     </div>
-                   <button name="descargar" id="mensaje_btn" type="submit" value="Descargar">Descargar</button>
+                   <button class="btnDescarga" name="descargar" id="mensaje_btn" type="submit" value="Descargar">Descargar</button>
                  </div>
               </form>
         </div>
     </div>
+    <footer class="pie">
+      <div class="contenedor">
+        <div class="redes">
+            <p class="parrafo-s">Siguenos En Nuestras Redes Sociales</p>
+            <div class="iconos">
+              <a href="http://www.twitter.com/fundabitguaric2" target="_blank" class="mr">
+                <i class="fab fa-twitter-square icono-m"></i>
+              </a>
+
+              <a href="http://www.facebook.com/fundabit.guarico.75" target="_blank" class="mr">
+                <i class="fab fa-facebook-square icono-m"></i>
+              </a>
+
+              <a href="http://www.instagram.com/fundabitguarico" target="_blank">
+                <i class="fab fa-instagram icono-m"></i>
+              </a>
+
+
+
+            </div>
+        </div>
+
+        <div style="somosfb">
+            <a href="https://twitter.com/hashtag/somosfundabit" target="_blank">
+          <img src="images/somos-fundabit-blanco.png" alt="Fundabit" class="img-fo">
+            </a>
+        </div>
+      </div>
+       <p class="parrafo-center">Desarrollado Por Gabriel Viloria <br> Fundabit 2019</p>
+    </footer>
   </div>
 </template>
 <script>
@@ -103,6 +133,12 @@ export default {
 }
 </script>
 <style type="text/css">
+.body {
+      margin: 0;
+        background: url("../.././logos/manzana.png")center center/ contain no-repeat,
+                    url("../.././logos/pan.jpg") center center/ cover no-repeat;
+                    height: 1200;
+}
 * {
     box-sizing: border-box;
 }
@@ -116,7 +152,7 @@ export default {
 }
 
 form {
-  
+
 }
 
 input[type="text"],
@@ -193,13 +229,12 @@ label.light {
 .padre-f {
     display: flex;
     flex-wrap: wrap-reverse;
-    justify-content: space-around;
-
+    justify-content: space-between;
+    padding: 100px;
 }
 
 .hijo {
       max-width: 300px;
-      /*margin: 10px auto;*/
       padding: 10px 20px;
       background: #f4f7f8;
       border-radius: 8px;
@@ -228,6 +263,52 @@ label.light {
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+/*footer*/
+footer{
+  margin-top: 200px;
+}
+.pie {
+  background-color: #FF4A00;
+  margin: 50px 0 0 0;
+  color: #fff;
+}
+.icono-m {
+    font-size: 30px;
+    margin-right: 16px;
+}
+
+.icono-m:last-of-type {
+    margin: 0;
+}
+.mr {
+    margin-right: 12px;
+}
+
+.parrafo-center {
+    text-align: center;
+    margin: 0;
+    margin-top: 20px;
+    padding: 16px;
+    background-color: rgba(0,0,0,.2);
+}
+.parrafo-s {
+    font-size: 13px;
+    text-transform: capitalize;
+}
+.contenedor {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.img-fo {
+  height: 75px;
+}
+.fundabit {
+    font-size: 16px;
 }
 
 </style>

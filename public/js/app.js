@@ -1884,6 +1884,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Descargas',
   data: function data() {
@@ -2048,6 +2078,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Home',
   data: function data() {
@@ -2085,7 +2153,8 @@ __webpack_require__.r(__webpack_exports__);
       errorTallaPantalon: null,
       errorTallaCamisa: null,
       errorRepresentante: null,
-      permisoRegistro: true
+      permisoRegistro: true,
+      registroExitoso: false
     };
   },
   methods: {
@@ -2234,6 +2303,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     registro: function registro() {
+      var _this = this;
+
       switch (this.distancia) {
         case 'Mini Carrera Atlética':
           this.distancia_id = 1;
@@ -2317,7 +2388,8 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = "http://127.0.0.1:8000/api/registrar";
       axios.post(url, params).then(function (res) {
-        alert('registrado con exito');
+        _this.registroExitoso = true;
+        _this.formulario = false;
       });
     },
     validarNombre: function validarNombre() {
@@ -2621,11 +2693,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     var url = "http://127.0.0.1:8000/api/planteles";
     axios.get(url).then(function (res) {
-      _this.plantelOpciones = res.data;
+      _this2.plantelOpciones = res.data;
     });
   }
 });
@@ -37984,8 +38056,8 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "fondo" }, [
-    _c("div", { staticClass: "padre-f body" }, [
+  return _c("div", { staticClass: "body" }, [
+    _c("div", { staticClass: "padre-f" }, [
       _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "hijo" }, [
@@ -38061,6 +38133,7 @@ var render = function() {
               _c(
                 "button",
                 {
+                  staticClass: "btnDescarga",
                   attrs: {
                     name: "descargar",
                     id: "mensaje_btn",
@@ -38074,7 +38147,9 @@ var render = function() {
           ]
         )
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _vm._m(2)
   ])
 }
 var staticRenderFns = [
@@ -38129,6 +38204,84 @@ var staticRenderFns = [
         ]
       )
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("footer", { staticClass: "pie" }, [
+      _c("div", { staticClass: "contenedor" }, [
+        _c("div", { staticClass: "redes" }, [
+          _c("p", { staticClass: "parrafo-s" }, [
+            _vm._v("Siguenos En Nuestras Redes Sociales")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "iconos" }, [
+            _c(
+              "a",
+              {
+                staticClass: "mr",
+                attrs: {
+                  href: "http://www.twitter.com/fundabitguaric2",
+                  target: "_blank"
+                }
+              },
+              [_c("i", { staticClass: "fab fa-twitter-square icono-m" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "mr",
+                attrs: {
+                  href: "http://www.facebook.com/fundabit.guarico.75",
+                  target: "_blank"
+                }
+              },
+              [_c("i", { staticClass: "fab fa-facebook-square icono-m" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                attrs: {
+                  href: "http://www.instagram.com/fundabitguarico",
+                  target: "_blank"
+                }
+              },
+              [_c("i", { staticClass: "fab fa-instagram icono-m" })]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticStyle: {} }, [
+          _c(
+            "a",
+            {
+              attrs: {
+                href: "https://twitter.com/hashtag/somosfundabit",
+                target: "_blank"
+              }
+            },
+            [
+              _c("img", {
+                staticClass: "img-fo",
+                attrs: {
+                  src: "images/somos-fundabit-blanco.png",
+                  alt: "Fundabit"
+                }
+              })
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "parrafo-center" }, [
+        _vm._v("Desarrollado Por Gabriel Viloria "),
+        _c("br"),
+        _vm._v(" Fundabit 2019")
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -38154,9 +38307,37 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "fondo" },
+    { staticClass: "body" },
     [
       _vm._m(0),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "fade" } }, [
+        _vm.registroExitoso
+          ? _c("div", { staticClass: "verificar" }, [
+              _c("h3", [_vm._v("Registrado exitosamente")]),
+              _vm._v(" "),
+              _c("img", {
+                attrs: {
+                  src: __webpack_require__(/*! ../.././logos/trofeo.jpg */ "./resources/logos/trofeo.jpg"),
+                  width: "100%"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.formulario = false
+                      _vm.recomendacion = true
+                    }
+                  }
+                },
+                [_vm._v("OK")]
+              )
+            ])
+          : _vm._e()
+      ]),
       _vm._v(" "),
       _c("transition", { attrs: { name: "fade" } }, [
         _vm.recomendacion
@@ -38169,7 +38350,7 @@ var render = function() {
               _vm._v(" "),
               _c("img", {
                 attrs: {
-                  src: __webpack_require__(/*! ../.././logos/Corriendo00.png */ "./resources/logos/Corriendo00.png"),
+                  src: __webpack_require__(/*! ../.././logos/jovenes-corriendo.jpg */ "./resources/logos/jovenes-corriendo.jpg"),
                   width: "100%"
                 }
               }),
@@ -38925,7 +39106,9 @@ var render = function() {
                 )
               : _vm._e()
           ])
-        : _vm._e()
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._m(1)
     ],
     1
   )
@@ -38964,6 +39147,84 @@ var staticRenderFns = [
             alt: "logo zona educativa guarico"
           }
         })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("footer", { staticClass: "pie" }, [
+      _c("div", { staticClass: "contenedor" }, [
+        _c("div", { staticClass: "redes" }, [
+          _c("p", { staticClass: "parrafo-s" }, [
+            _vm._v("Siguenos En Nuestras Redes Sociales")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "iconos" }, [
+            _c(
+              "a",
+              {
+                staticClass: "mr",
+                attrs: {
+                  href: "http://www.twitter.com/fundabitguaric2",
+                  target: "_blank"
+                }
+              },
+              [_c("i", { staticClass: "fab fa-twitter-square icono-m" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "mr",
+                attrs: {
+                  href: "http://www.facebook.com/fundabit.guarico.75",
+                  target: "_blank"
+                }
+              },
+              [_c("i", { staticClass: "fab fa-facebook-square icono-m" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                attrs: {
+                  href: "http://www.instagram.com/fundabitguarico",
+                  target: "_blank"
+                }
+              },
+              [_c("i", { staticClass: "fab fa-instagram icono-m" })]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticStyle: {} }, [
+          _c(
+            "a",
+            {
+              attrs: {
+                href: "https://twitter.com/hashtag/somosfundabit",
+                target: "_blank"
+              }
+            },
+            [
+              _c("img", {
+                staticClass: "img-fo",
+                attrs: {
+                  src: "images/somos-fundabit-blanco.png",
+                  alt: "Fundabit"
+                }
+              })
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "parrafo-center" }, [
+        _vm._v("Desarrollado Por Gabriel Viloria "),
+        _c("br"),
+        _vm._v(" Fundabit 2019")
       ])
     ])
   }
@@ -90649,17 +90910,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/logos/Corriendo00.png":
-/*!*****************************************!*\
-  !*** ./resources/logos/Corriendo00.png ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/Corriendo00.png?3d2d6b20eda025bb5c8efdc594aa4123";
-
-/***/ }),
-
 /***/ "./resources/logos/gobernacion.png":
 /*!*****************************************!*\
   !*** ./resources/logos/gobernacion.png ***!
@@ -90671,6 +90921,17 @@ module.exports = "/images/gobernacion.png?a36212370d71353a048839941472541b";
 
 /***/ }),
 
+/***/ "./resources/logos/jovenes-corriendo.jpg":
+/*!***********************************************!*\
+  !*** ./resources/logos/jovenes-corriendo.jpg ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/jovenes-corriendo.jpg?18c5bef3d6f6a992a6b9952e73567209";
+
+/***/ }),
+
 /***/ "./resources/logos/mppe.png":
 /*!**********************************!*\
   !*** ./resources/logos/mppe.png ***!
@@ -90679,6 +90940,17 @@ module.exports = "/images/gobernacion.png?a36212370d71353a048839941472541b";
 /***/ (function(module, exports) {
 
 module.exports = "/images/mppe.png?c441366f6bf549757bcd9f3210b12e73";
+
+/***/ }),
+
+/***/ "./resources/logos/trofeo.jpg":
+/*!************************************!*\
+  !*** ./resources/logos/trofeo.jpg ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/trofeo.jpg?1abf4e24b52027e16daec1a1f274e5a1";
 
 /***/ }),
 
