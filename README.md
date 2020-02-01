@@ -1,3 +1,1 @@
-# carrera4k
-sistema de registro de una carrera de cuatro kilometros, que permite tener un mejor control de asistencias sobre el mismo!!!!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!
+<h1>Registro municipal de la Carrera Bruno Carrasquel del estado Guárico</h1>
