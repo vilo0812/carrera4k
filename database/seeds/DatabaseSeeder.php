@@ -10,15 +10,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-    	$this->truncateTable([
-    		'grados',
-        'participantes',
-        'tallas',
-        'direcciones',
-        'distancias',
-        'planteles',
-        'registros'
-        ]);
+    	// $this->truncateTable([
+    	// 	'grados',
+     //    'participantes',
+     //    'tallas',
+     //    'direcciones',
+     //    'distancias',
+     //    'planteles',
+     //    'registros'
+     //    ]);
         $this->call(GradoSeeder::class);
         $this->call(ParticipanteSeeder::class);
         $this->call(TallaSeeder::class);
